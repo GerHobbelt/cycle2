@@ -28,7 +28,7 @@ $.fn.cycle.transitions.carousel = {
     // transition API impl
     preInit: function( opts ) {
         opts.hideNonActive = false;
-        
+
         opts.container.on('cycle-destroyed', $.proxy(this.onDestroy, opts.API));
         // override default API implementation
         opts.API.stopTransition = this.stopTransition;
@@ -36,7 +36,7 @@ $.fn.cycle.transitions.carousel = {
         // issue #10
         for (var i=0; i < opts.startingSlide; i++) {
             opts.container.append( opts.slides[0] );
-        }        
+        }
     },
 
     // transition API impl
@@ -188,7 +188,7 @@ $.fn.cycle.transitions.carousel = {
             else if ( hops < 0 && opts.currSlide > maxCurr ) {
                 hops += opts.currSlide - maxCurr;
             }
-            else 
+            else
                 currSlide = opts.currSlide;
 
             moveBy = this.getScroll( opts, vert, currSlide, hops );
@@ -202,7 +202,7 @@ $.fn.cycle.transitions.carousel = {
             }
             else if ( !fwd && opts.nextSlide == opts.slideCount - 1 ) {
                 // moving from first slide to last
-                moveBy = this.getDim( opts, opts.currSlide, vert );
+                moveBy = this.getDim( opts, opts.nextSlide, vert );
                 callback = this.genCallback( opts, fwd, vert, callback );
             }
             else {
@@ -234,7 +234,7 @@ $.fn.cycle.transitions.carousel = {
         }
         else {
             for (i=currSlide; i > currSlide+hops; i--)
-                moveBy += this.getDim( opts, i, vert);
+                moveBy += this.getDim( opts, i - 1, vert);
         }
         return moveBy;
     },
