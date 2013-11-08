@@ -3,10 +3,14 @@
 		"exports"
 	],
 
+	"globals": {
+		"jQuery": false
+	},
+
 	"bitwise": true,
 	"camelcase": true,
-	"curly": true,
-	"eqeqeq": true,
+	"curly": false,
+	"eqeqeq": false,
 	"forin": true,
 	"immed": true,
 	"latedef": false,
@@ -15,15 +19,15 @@
 	"noempty": true,
 	"nonew": true,
 	"plusplus": false,
-	"quotmark": "double",
+	"quotmark": false,
 	"undef": true,
-	"unused": true,
-	"trailing": true,
+	"unused": false,
+	"trailing": false,
 
 	"proto": true,
 	"sub": true,
 
 	"browser": true,
 
-	"onevar": true
+	"onevar": false
 }
