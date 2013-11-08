@@ -40,7 +40,7 @@ grunt.initConfig({
 				"outro.js"
 			],
 			dest: "dist/jquery.cycle2.js"
-		}
+		},
 		"full": {
 			options: { process: process },
 			src: [
@@ -71,7 +71,7 @@ grunt.initConfig({
 				"outro.js"
 			],
 			dest: "dist/jquery.cycle2.full.js"
-		}
+		},
 		"tiny": {
 			options: { process: process },
 			src: [
