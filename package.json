@@ -1,0 +1,52 @@
+{
+  "name": "jquery-cycle2",
+  "title": "Cycle2",
+  "description": "A versatile slideshow plugin for jQuery built around ease-of-use.",
+  "version": "1.0.0-2013.11.08",
+  "homepage": "http://jquery.malsup.com/cycle2/",
+  "author": {
+    "name": "Mike Alsup",
+    "url": "https://github.com/malsup"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:malsup/cycle2.git"
+  },
+  "keywords": [
+    "slideshow",
+    "carousel",
+    "slider",
+    "cycle",
+    "jquery"
+  ],
+  "bugs": {
+    "url": "git@github.com:malsup/cycle2.git"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://malsup.github.com/mit-license.txt"
+    },
+    {
+      "type": "GPL",
+      "url": "http://malsup.github.com/gpl-license-v2.txt"
+    }
+  ],
+  "dependencies": {
+    "jquery": ">=1.7"
+  },
+  "devDependencies": {
+    "grunt": ">=0.4.0",
+    "grunt-cli": ">=0.1.9",
+    "grunt-contrib-concat": "~0.3.0",
+    "grunt-contrib-jshint": "~0.2.0",
+    "grunt-contrib-qunit": "~0.2.0",
+    "grunt-contrib-watch": "~0.3.0",
+    "grunt-git-authors": "~1.2.0"
+  },
+  "scripts": {
+    "test": "grunt",
+    "prepublish": "grunt build"
+  },
+  "main": "dist/jquery.cycle2.js"
+}

@@ -1,0 +1,7 @@
+
+# NPM install stuff
+node_modules
+
+# Editor bak files
+*.bak
+*~
