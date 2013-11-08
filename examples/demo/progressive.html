@@ -1,0 +1,343 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Progressive Loading</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Progressive Loading</h1>
+</div>
+
+<div id="main">
+
+<style>
+.auto   { width: 200px; height: 200px }
+.manual { width: 300px; height: 225px }
+
+/* display paused text on top of paused slideshow */
+.cycle-loading:after {
+    content: 'Loading'; color: white; background: black; padding: 10px;
+    z-index: 500; position: absolute; top: 10px; right: 10px;
+    border-radius: 10px;
+    opacity: .5; filter: alpha(opacity=50);
+}
+
+.example3 > div { width: 100%; height: 100% }
+.example3 p { 
+    background: black; color: white; margin: 0; padding: 5px; 
+    position: absolute; bottom: 0; opacity: .6; width: 100%;
+    text-align: center;
+}
+</style>
+
+<p>
+Progressive loading is a great way to reduce the bandwidth required by your slideshow.  Typically, a slideshow
+declares all of its slides in the markup and the browser downloads all of the images needed when the page loads.  
+This is fine in many cases, but for bandwidth-challenged devices this is unacceptable.  Cycle2's progressive download
+support allows you to declare a slideshow with very few slides and then load more on demand if they are 
+needed.
+<p>
+The slideshows on this page start off with just a single slide.  Each time a new slide is needed, any
+images that it contains are loaded from the server (if not already loaded).  So as the slideshows progress,
+new slides are downloaded on demand.
+<p>
+The <code>data-cycle-progressive</code> attribute is used to identify an element in the DOM
+which holds either a JSON array or HTML text representing the slides to be loaded.  
+See the examples below to understand how the slide data should be formatted.
+
+<h2 id="json">Example 1 - JSON Data</h2>
+<p>
+This example shows how slide data can be embedded as JSON data inside 
+a text script block.
+<pre>
+&lt;div class="cycle-slideshow auto" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    data-cycle-caption=".caption1"
+    data-cycle-caption-template="{{slideNum}} / 9"
+    <span class=special>data-cycle-loader=true</span>
+    <span class=special>data-cycle-progressive="#images"</span>
+    >
+    &lt;!-- only one image declared in markup -->
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach1.jpg">
+
+    &lt;!-- 
+        JSON array of slides to be loaded progressively,
+        nested inside a script block.  The script block does not need
+        to be inslide the slideshow container, it can be anywhere on the
+        page.  Note the <em>type</em> on the script tag.
+    -->
+    <div class=special>&lt;script id="images" <strong>type="text/cycle"</strong>>
+[
+    "&lt;img src='http://jquery.malsup.com/cycle2/images/beach2.jpg'>",
+    "&lt;img src='http://jquery.malsup.com/cycle2/images/beach3.jpg'>",
+    ...
+    "&lt;img src='http://jquery.malsup.com/cycle2/images/beach9.jpg'>"
+]
+&lt;/script></div>
+&lt;/div>
+&lt;div class="center caption1">&lt;/div>
+</pre>
+<div class="info">
+<p>
+As always, your JSON must be properly formatted!  That means double quotes around
+the array values. For example:  <code>[ "&lt;div>slide one&lt;/div>", "&lt;div>slide two&lt;/div>" ]</code>
+</div>
+<div class="cycle-slideshow auto" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    data-cycle-caption=".caption1"
+    data-cycle-caption-template="{{slideNum}} / 9"
+    data-cycle-loader=true
+    data-cycle-progressive="#images"
+    >
+    <img src="../images/beach1.jpg">
+
+    <script id="images" type="text/cycle">
+    [
+        "<img src='http://jquery.malsup.com/cycle2/images/beach2.jpg'>",
+        "<img src='../images/beach3.jpg'>",
+        "<img src='../images/beach4.jpg'>",
+        "<img src='../images/beach5.jpg'>",
+        "<img src='../images/beach6.jpg'>",
+        "<img src='../images/beach7.jpg'>",
+        "<img src='../images/beach8.jpg'>",
+        "<img src='../images/beach9.jpg'>"
+    ]
+    </script>
+</div>
+<div class="center caption1"></div>
+
+
+<h2 id="text">Example 2 - HTML Text Data</h2>
+<p>
+This example shows how slide data can be embedded as plain text markup within
+a script block.  In this case, the default behavior of Cycle2 is that it assumes
+each slide is on it's own line, as shown below.
+<pre>
+&lt;div class="cycle-slideshow auto" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    data-cycle-caption=".caption2"
+    data-cycle-caption-template="{{slideNum}} / 9"
+    <span class=special>data-cycle-loader=true</span>
+    <span class=special>data-cycle-progressive="#images2"</span>
+    >
+    &lt;!-- only one image declared in markup -->
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach1.jpg">
+
+    &lt;!-- 
+        markup for slides to be loaded progressively, nested
+        inside a script block.  The script block does not need
+        to be inslide the slideshow container, it can be anywhere on the
+        page.  Note the <em>type</em> on the script tag.
+
+        Note: by default, each slide needs to be on it's own line.
+    -->
+    <div class=special>&lt;script id="images2" <strong>type="text/cycle"</strong>>
+    &lt;img src='http://jquery.malsup.com/cycle2/images/beach2.jpg'>
+    &lt;img src='http://jquery.malsup.com/cycle2/images/beach3.jpg'>
+    ...
+    &lt;img src='http://jquery.malsup.com/cycle2/images/beach9.jpg'>
+&lt;/script></div>
+&lt;/div>
+&lt;div class="center caption2">&lt;/div>
+</pre>
+<div class="cycle-slideshow auto" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    data-cycle-caption=".caption2"
+    data-cycle-caption-template="{{slideNum}} / 9"
+    data-cycle-loader=true
+    data-cycle-progressive="#images2"
+    >
+    <img src="../images/beach1.jpg">
+
+    <script id="images2" type="text/cycle">
+    [
+        "<img src='http://jquery.malsup.com/cycle2/images/beach2.jpg'>",
+        "<img src='../images/beach3.jpg'>",
+        "<img src='../images/beach4.jpg'>",
+        "<img src='../images/beach5.jpg'>",
+        "<img src='../images/beach6.jpg'>",
+        "<img src='../images/beach7.jpg'>",
+        "<img src='../images/beach8.jpg'>",
+        "<img src='../images/beach9.jpg'>"
+    ]
+    </script>
+</div>
+<div class="center caption2"></div>
+
+
+<h2 id="delimited">Example 3 - Delimited HTML Text Data</h2>
+<p>
+This example shows how slide data can be flexibly embedded as plain text markup within
+a script block.  And how the slide elements can be delimited using the
+<code>data-cycle-split</code> attribute.  The slides in this slideshow contain
+multiple elements and their text markup spans multiple lines.  The <code>data-cycle-split</code> attribute
+on the script tag tells Cycle2 where to split the text in order to build an array
+of slide text.  In this case, the split value is set to <code>---</code> (three dashes)
+and the same sequence is used to separate the slides.
+<pre>
+&lt;div class="cycle-slideshow auto" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    data-cycle-caption=".caption3"
+    data-cycle-caption-template="{{slideNum}} / 5"
+    data-cycle-loader=true
+    <span class=special>data-cycle-progressive="#slides"</span>
+    <span class=special>data-cycle-slides=">div"</span>
+    >
+        &lt;div>
+            &lt;img src="http://jquery.malsup.com/cycle2/images/beach1.jpg">
+            &lt;p>Image 1&lt;/p>
+        &lt;/div>
+    
+        <div class=special>&lt;script id="slides" type="text/cycle" <strong>data-cycle-split="---"</strong>>
+    &lt;div>
+        &lt;img src="http://jquery.malsup.com/cycle2/images/beach2.jpg">
+        &lt;p>Image 2&lt;/p>
+    &lt;/div>
+    ---
+    &lt;div>
+        &lt;img src="http://jquery.malsup.com/cycle2/images/beach3.jpg">
+        &lt;p>Image 3&lt;/p>
+    &lt;/div>
+    ---
+    &lt;div>
+        &lt;img src="http://jquery.malsup.com/cycle2/images/beach4.jpg">
+        &lt;p>Image 4&lt;/p>
+    &lt;/div>
+    ---
+    &lt;div>
+        &lt;img src="http://jquery.malsup.com/cycle2/images/beach5.jpg">
+        &lt;p>Image 5&lt;/p>
+    &lt;/div>
+&lt;/script></div>
+&lt;/div>
+&lt;div class="center caption3">&lt;/div>
+</pre>
+<div class="cycle-slideshow auto example3" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    data-cycle-caption=".caption3"
+    data-cycle-caption-template="{{slideNum}} / 5"
+    data-cycle-loader=true
+    data-cycle-progressive="#slides"
+    data-cycle-slides=">div"
+    >
+        <div>
+            <img src="../images/beach1.jpg">
+            <p>Image 1</p>
+        </div>
+
+    <script id="slides" type="text/cycle" data-cycle-split="---">
+        <div>
+            <img src="../images/beach2.jpg">
+            <p>Image 2</p>
+        </div>
+        ---
+        <div>
+            <img src="../images/beach3.jpg">
+            <p>Image 3</p>
+        </div>
+        ---
+        <div>
+            <img src="../images/beach4.jpg">
+            <p>Image 4</p>
+        </div>
+        ---
+        <div>
+            <img src="../images/beach5.jpg">
+            <p>Image 5</p>
+        </div>
+    </script>
+</div>
+<div class="center caption3"></div>
+
+
+<h2 id="manual">Manual</h2>
+<p>
+This example shows that progressive loading works just as well for 
+manual slideshows.
+<div class="cycle-slideshow manual" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    data-cycle-caption-template="{{slideNum}} / 4"
+    data-cycle-next="#next"
+    data-cycle-prev="#prev"
+    data-cycle-loader=true
+    data-cycle-progressive="#images4"
+    >
+    <div class="cycle-caption"></div>
+    <img src="../images/p1.jpg">
+
+    <script id="images4" type="text/cycle">
+    [
+        "<img src='http://jquery.malsup.com/cycle2/images/p2.jpg'>",
+        "<img src='../images/p3.jpg'>",
+        "<img src='../images/p4.jpg'>"
+    ]
+    </script>
+
+</div>
+<div class=center>
+    <a href=#><span id=prev>&lt;&lt; Prev</span></a>
+    <a href=#><span id=next> Next&gt;&gt;</span></a>
+</div>
+
+<h2 id="programmatic">Programmatic</h2>
+<p>
+If you're one of those devs that prefers writing script and you don't want to 
+use the above declarative approach, Cycle2 has you covered.  You can pass
+the <code>cycle()</code> function an option hash that includes the
+<code>progressive</code> property, and assign that property value to either
+a JSON array or a function that returns a JSON array.
+
+<pre>
+&lt;div class="#mySlideshow"
+    data-cycle-loader=true
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+&lt;/div>
+
+&lt;script>
+<span class=special>var slides</span> = [
+    "&lt;img src='http://jquery.malsup.com/cycle2/images/p2.jpg'>",
+    "&lt;img src='http://jquery.malsup.com/cycle2/images/p3.jpg'>",
+    "&lt;img src='http://jquery.malsup.com/cycle2/images/p4.jpg'>"
+];
+
+$('#mySlideshow').cycle({
+    <span class=special>progressive: slides</span>
+});
+&lt;/script>
+</pre>
+
+<h2>Visualization</h2>
+<p>
+The image below shows the network traffic for a progressively loaded slideshow.
+<p>
+<img src="../images/devtools.png">
+
+<h2 id="limitations">Limitations</h2>
+<p>
+Currently, slideshows with pagers are not supported with the <code>progressive</code> option.
+This seems like an edge case, but if there is an uproar then I'll add support for it.
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

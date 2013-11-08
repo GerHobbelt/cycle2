@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Manual Overrides</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Manual Overrides</h1>
+</div>
+
+<div id="main">
+
+<p>
+Cycle2 provides two options which allow you to change the transition and the speed
+of the transition if the transition is initiated through user interaction.  This includes
+clicking prev or next links, clicking pager links, or causing a goto command to be issued
+to the slideshow.
+<p>
+The <code>data-cycle-manual-fx</code> attribute allows you to specify the transition to
+be used for manual transitions and <code>data-cycle-manual-speed</code> allows you to 
+set the speed of the transition.  By default, these values inherit the fx and speed settings
+for the slideshow.
+
+<pre>
+&lt;div class=center>&lt;a href=# id=next>Next&lt;/a>&lt;/div>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx="fadeout"
+    data-cycle-timeout="3000"
+    data-cycle-next="#next"
+    <span class=special>data-cycle-manual-fx="scrollHorz"</span>
+    <span class=special>data-cycle-manual-speed="300"</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+</pre>
+
+<div class=center><a href=# id=next>Next</a></div>
+<div class="cycle-slideshow" 
+    data-cycle-fx=fadeout
+    data-cycle-timeout=4000
+    data-cycle-next="#next"
+    data-cycle-manual-fx=scrollHorz
+    data-cycle-manual-speed=300
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

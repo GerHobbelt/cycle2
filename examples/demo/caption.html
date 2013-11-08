@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Captions</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Captions</h1>
+</div>
+
+<div id="main">
+
+<h2 id="simple">Simple</h2>
+<p>
+You can add a simple, default caption by including an empty div in your
+slideshow container with the class <code>cycle-caption</code>.
+The default caption will display the current slide index and the
+total slidecount for the slideshow.
+
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    >
+    &lt;!-- empty element for caption -->
+    <span class=special>&lt;div class="cycle-caption">&lt;/div></span>
+
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+</pre>
+
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    >
+    <!-- empty element for caption -->
+    <div class="cycle-caption"></div>
+
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+<p>
+See <a href="demo-slideshow.css">demo-slideshow.css</a> for the caption styles that are being
+applied in this demo.
+
+
+
+<h2 id="custom">Custom Template</h2>
+<p>
+Captions are created using the template string found in the
+<code>caption-template</code> option.  The default value for that option
+is <code>'{{slideNum}} / {{slideCount}}'</code> as can be seen in the example above.
+<p>
+To override the default caption template and create custom captions simply declare a
+<code>data-cycle-caption-template</code> attribute and set it to your desired
+template string. Template strings support a Mustache-style syntax by default.  For example,
+to create captions that are more verbose:
+
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    <span class=special>data-cycle-caption="#custom-caption"</span>
+    <span class=special>data-cycle-caption-template="Slide {{slideNum}} of {{slideCount}}"</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+&lt;!-- empty element for caption -->
+<span class=special>&lt;div id="custom-caption" class="center">&lt;/div></span>
+</pre>
+
+<p>
+Note also that in this example the caption container is outside the slideshow and is referenced
+using the <code>data-cycle-caption</code> option.
+
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    data-cycle-caption="#custom-caption"
+    data-cycle-caption-template="Slide {{slideNum}} of {{slideCount}}"
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+<!-- empty element for caption -->
+<div id="custom-caption" class="center"></div>
+
+
+
+<h2 id="adv-custom">Advanced Custom Template</h2>
+<p>
+This example shows how to combine slideshow data with external metadata stored
+on the slide element.  Here our caption template references metadata stored on the element via a <code>data-*</code>
+attribute.  The <code>data-cycle-title</code> attribute is not a standard 
+Cycle option, but it can be added to the slide in order to reference
+it in our caption template via <code>{{cycleTitle}}</code> (camelCase).  We could have chosen
+a different name for that attribute, for example <code>data-title</code>
+and accessed it accordingly, <code>{{title}}</code>.
+
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    <span class=special>data-cycle-caption="#adv-custom-caption"</span>
+    <span class=special>data-cycle-caption-template="Slide {{slideNum}}: {{cycleTitle}}"</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg" <span class=special>data-cycle-title="Spring"</span> >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg" <span class=special>data-cycle-title="Redwoods"</span> >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg" <span class=special>data-cycle-title="Angle Island"</span> >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg" <span class=special>data-cycle-title="Raquette Lake"</span> >
+&lt;/div>
+&lt;!-- empty element for caption -->
+<span class=special>&lt;div id="adv-custom-caption" class="center">&lt;/div></span>
+</pre>
+
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    data-cycle-caption="#adv-custom-caption"
+    data-cycle-caption-template="Slide {{slideNum}}: {{cycleTitle}}"
+    >
+    <img src="../images/p1.jpg" data-cycle-title="Spring" >
+    <img src="../images/p2.jpg" data-cycle-title="Redwoods" >
+    <img src="../images/p3.jpg" data-cycle-title="Angle Island" >
+    <img src="../images/p4.jpg" data-cycle-title="Raquette Lake" >
+</div>
+<!-- empty element for caption -->
+<div id="adv-custom-caption" class="center"></div>
+
+
+
+<h2 id="alt">Alt Captions</h2>
+<p>
+This example shows how to use an image's <code>alt</code> attribute for the caption.
+
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    <span class=special>data-cycle-caption="#alt-caption"</span>
+    <span class=special>data-cycle-caption-template="{{alt}}"</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg" <span class=special>alt="Spring"</span> >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg" <span class=special>alt="Redwoods"</span> >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg" <span class=special>alt="Angle Island"</span> >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg" <span class=special>alt="Raquette Lake"</span> >
+&lt;/div>
+&lt;!-- empty element for caption -->
+<span class=special>&lt;div id="alt-caption" class="center">&lt;/div></span>
+</pre>
+
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    data-cycle-caption="#alt-caption"
+    data-cycle-caption-template="{{alt}}"
+    >
+    <img src="../images/p1.jpg" alt="Spring" >
+    <img src="../images/p2.jpg" alt="Redwoods" >
+    <img src="../images/p3.jpg" alt="Angle Island" >
+    <img src="../images/p4.jpg" alt="Raquette Lake" >
+</div>
+<!-- empty element for caption -->
+<div id="alt-caption" class="center"></div>
+
+<h2>More...</h2>
+<p>
+For more options, check out the <a href="caption2.html">animated caption/overlay demos</a>.
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

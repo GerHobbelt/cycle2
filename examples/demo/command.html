@@ -1,0 +1,106 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Commands</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Commands</h1>
+</div>
+
+<div id="main">
+<style> 
+#log { height: 100px; max-height: 100px; overflow: auto; }
+</style>
+
+<p>
+There are two ways to use Cycle's command API, programatically and declaratively.  
+
+<h2 id="programmatic">Programmatic Commands</h2>
+    <p>
+    When invoking a Cycle command programatically
+    you pass a command string to the <code>cycle</code> function.
+    For example, to pause a slideshow you would issue the <code>pause</code> command:
+    <pre>$('.cycle-slideshow').cycle('pause');</pre>
+    <p>
+    To resume the slideshow you would issue the <code>resume</code> command:
+    <pre>$('.cycle-slideshow').cycle('pause');</pre>
+
+
+<h2 id="declarative">Declarative Commands</h2>
+    <p>
+    Cycle will issue commands to slideshows automatically for any element that
+    contains the <code>data-cycle-cmd</code> attribute.  For example, you could
+    have a button element that pauses your slideshow using markup like this:
+    <pre>&lt;button <span class=special>data-cycle-cmd="pause"</span>>Pause&lt;/button></pre>
+    <p>
+    By default, when this button is clicked it will issue a the <em>pause</em>
+    command using the following code:
+    <pre>$('.cycle-slideshow').cycle('pause');</pre>
+    <p>
+    If your slideshow does not have the class <code>cycle-slideshow</code>, or if
+    you have multiple slideshows on your page, you can use the <code>data-cycle-context</code>
+    attribute to fine-tune the selector.  For example:
+    <pre>&lt;button data-cycle-cmd="pause" <span class=special>data-cycle-context="#slideshow"</span>>Pause&lt;/button></pre>
+    <p>
+    The markup above would auto-generate and execute the following code when the button is clicked:
+    <pre>$('#slideshow').cycle('pause');</pre>
+
+
+
+<h3 id="example1">Example</h3>
+<div class="cycle-slideshow" 
+    data-cycle-fx="scrollHorz" 
+    data-cycle-timeout="2000"
+    >
+    <div class="cycle-pager"></div>
+    <div class="cycle-caption"></div>
+
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+<div id=buttons>
+    <button data-cycle-cmd="prev">Prev</button>
+    <button data-cycle-cmd="next">Next</button>
+    <button data-cycle-cmd="pause">Pause</button>
+    <button data-cycle-cmd="resume">Resume</button>
+    <button data-cycle-cmd="stop">Stop</button>
+    <button data-cycle-cmd="destroy">Destroy</button>
+    <button data-cycle-cmd="goto" data-cycle-arg="2">Goto Slide 3</button>
+</div>
+
+<p>
+Cycle's log output is displayed below (most recent entries on top):
+<div id="log" class="well corner"></div>
+
+<p>
+The full list of supported commands can be found on the <a href="../api/index.html#commands">API page</a>.
+
+<script>
+$('.cycle-slideshow').on('cycle-bootstrap', function(e, opts, API) {
+    // redirect cycle log onto the page
+    API.log = function() {
+        $('#log').prepend('<div>' + Array.prototype.join.call(arguments, ' ') + '</div>');
+    }
+});
+</script>
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

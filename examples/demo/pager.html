@@ -1,0 +1,334 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Pagers</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Pagers</h1>
+</div>
+
+<div id="main">
+
+<style> 
+.external { position: static }
+.external > * { margin: 0 5px }
+.cycle-pager { display: block; }
+
+.example-pager { text-align: center; width: 100%; z-index: 500; top: 10px; overflow: hidden; }
+.example-pager span { font-size: 50px; width: 16px; height: 16px; display: inline-block; color: #ddd; }
+.example-pager span.cycle-pager-active { color: #D69746;}
+.example-pager > * { cursor: pointer;}
+</style>
+
+
+<h2 id="simple">Simple</h2>
+<p>You can add a simple, default pager by including an empty div in your
+slideshow container with the class <code>cycle-pager</code>.
+
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    >
+    &lt;!-- empty element for pager links -->
+    <span class=special>&lt;div class="cycle-pager">&lt;/div></span>
+
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+</pre>
+
+<p>
+See <a href="demo-slideshow.css">demo-slideshow.css</a> for the pager styles that are being
+applied in this demo.
+
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    >
+    <!-- empty element for pager links -->
+    <div class="cycle-pager"></div>
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+
+
+<h2 id="multiple">Multiple Pagers</h2>
+<p>
+The <code>data-cycle-pager</code> option identifies the element(s) to use
+as the pager link container.  By default, this option's value is 
+<code>> .cycle-pager</code>.  This is a jQuery selector string which 
+selects all immediate child elements of the slideshow container that have
+the class <em>cycle-pager</em>.  To have multiple pagers you can set the value
+of this option to a selector string which identifies each of the pager 
+containers for your slideshow.
+
+<pre>
+<span class=special>&lt;div class="example-pager">&lt;/div></span>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    <span class=special>data-cycle-pager=".example-pager"</span>
+    >
+    &lt;!-- empty element for pager links -->
+    &lt;div class="cycle-pager">&lt;/div>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+<span class=special>&lt;div class="example-pager">&lt;/div></span>
+</pre>
+
+<div class="example-pager"></div>
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    data-cycle-pager=".example-pager"
+    >
+    <!-- empty element for pager links -->
+    <div class="cycle-pager"></div>
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+<div class="example-pager"></div>
+
+
+
+
+<h2 id="hover">Hover Event</h2>
+<p>
+By default, pager links must be clicked in order to be activated.  This can
+be changed by overriding the <code>pager-event</code> option.  For example, set
+<code>data-cycle-pager-event</code> to <code>mouseover</code> in order to active links on hover.
+
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    <span class=special>data-cycle-pager-event="mouseover"</span>
+    >
+    &lt;!-- empty element for pager links -->
+    &lt;div class="cycle-pager">&lt;/div>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+</pre>
+
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    data-cycle-pager-event="mouseover"
+    >
+    <!-- empty element for pager links -->
+    <div class="cycle-pager"></div>
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+
+
+<h2 id="custom">Custom Template</h2>
+<p>
+Pager links are created using the template string found in the
+<code>pager-template</code> option.  The default value for that option
+is <code>'&lt;span>&amp;bull;&lt;/span>'</code> as can be seen in the examples above.
+<p>
+To override the default and create custom pager links simply declare a
+<code>data-cycle-pager-template</code> attribute and set its value to your desired
+template string. Template strings support a Mustache-style syntax by default.  For example,
+to create pager links that are numbered to match each slide you can do the
+following:
+
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    <span class=special>data-cycle-pager="#custom-pager"</span>
+    <span class=special>data-cycle-pager-template="&lt;strong>&lt;a href=#> {{slideNum}} &lt;/a>&lt;/strong>"</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+&lt;!-- empty element for pager links -->
+&lt;div <span class=special>id="custom-pager"</span> class="center">&lt;/div>
+</pre>
+
+<p>
+Within your template string you can access any of the <a href="../api/index.html#state">state</a> properties or metadata
+stored on the slide itself.
+<p>
+Note also that in this example the pager container is outside the slideshow and is referenced
+using the <code>data-cycle-pager</code> option.
+
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    data-cycle-pager="#custom-pager"
+    data-cycle-pager-template="<strong><a href=#> {{slideNum}} </a></strong>"
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+<!-- empty element for pager links -->
+<div id=custom-pager class="center"></div>
+
+
+
+
+<h2 id="adv-custom">Advanced Custom Template</h2>
+<p>
+This example shows how to pull values from the slide elements themselves.  In this case,
+we're accessing the slide's <code>src</code> property in order to build a 
+thumbnail for the pager link.
+
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    data-cycle-pager="#adv-custom-pager"
+    data-cycle-pager-template="&lt;a href="#" >&lt;img <span class=special>src='{{src}}'</span> width=20 height=20>&lt;/a>"
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+&lt;!-- empty element for pager links -->
+&lt;div id=adv-custom-pager class="center external">&lt;/div>
+</pre>
+
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    data-cycle-pager="#adv-custom-pager"
+    data-cycle-pager-template="<a href=#><img src='%7b%7bsrc%7d%7d.html' width=20 height=20></a>"
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+<!-- empty element for pager links -->
+<div id=adv-custom-pager class="center external"></div>
+
+
+
+<h2 id="per-slide">Per-Slide Template</h2>
+<p>
+This example shows how the <code>data-cycle-pager-template</code> attribute can be used
+on the slide instead of the container.  This allows the slide's pager template to be
+explicity declared on in the slide itself.
+
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    data-cycle-pager="#per-slide-template"
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg" <span class=special>data-cycle-pager-template="&lt;a href=#>Spring&lt;/a>"</span>>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg" <span class=special>data-cycle-pager-template="&lt;a href=#>Trees&lt;/a>"</span>>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg" <span class=special>data-cycle-pager-template="&lt;a href=#>Water&lt;/a>"</span>>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg" <span class=special>data-cycle-pager-template="&lt;a href=#>Sunset&lt;/a>"</span>>
+&lt;/div>
+&lt;!-- empty element for pager links -->
+&lt;div id=per-slide-template class="center external">&lt;/div>
+</pre>
+
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    data-cycle-pager="#per-slide-template"
+    >
+    <img src="../images/p1.jpg" data-cycle-pager-template="<a href=#>Spring</a>">
+    <img src="../images/p2.jpg" data-cycle-pager-template="<a href=#>Trees</a>">
+    <img src="../images/p3.jpg" data-cycle-pager-template="<a href=#>Water</a>">
+    <img src="../images/p4.jpg" data-cycle-pager-template="<a href=#>Sunset</a>">
+</div>
+<!-- empty element for pager links -->
+<div id=per-slide-template class="center external"></div>
+
+
+
+<h2 id="existing">Existing Links (no template)</h2>
+<p>
+Another way to achieve the results of the earlier example is to use existing 
+markup for the pager links.  With this approach it is necessary to set the
+<code>pager-template</code> option to an empty string. The <code>pager</code> option
+identifies the pager container and the child elements of that container will
+become pager links.
+
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    data-cycle-pager="#no-template-pager"
+    <span class=special>data-cycle-pager-template=""</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+&lt;div id=no-template-pager class="cycle-pager external">
+    &lt;!-- using thumbnail image files would be even better! -->
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg" width=20 height=20>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg" width=20 height=20> 
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg" width=20 height=20> 
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg" width=20 height=20>
+&lt;/div>
+</pre>
+
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    data-cycle-pager="#no-template-pager"
+    data-cycle-pager-template=""
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+<div id=no-template-pager class="cycle-pager external">
+    <!-- using thumbnail image files would be even better! -->
+    <img src="../images/p1.jpg" width=20 height=20>
+    <img src="../images/p2.jpg" width=20 height=20> 
+    <img src="../images/p3.jpg" width=20 height=20> 
+    <img src="../images/p4.jpg" width=20 height=20>
+</div>
+
+
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

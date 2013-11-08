@@ -1,0 +1,138 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Auto Height</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Auto Height</h1>
+</div>
+
+<div id="main">
+
+<style>
+.cycle-slideshow { width: 30% }
+</style>
+
+<h2>What is Auto-Height?</h2>
+<p>
+Auto-Height is a very handy feature provided by Cycle2 which manages a slideshow container's height.  
+In order to achieve a slideshow effect,
+slides must be positioned absolutely within their parent so they can be stacked on top each other.
+However, this causes the parent element to collapse into a zero-height element because
+absolutely postioned elements do not participate in the normal flow of the document.
+<p>
+This behavior is not a problem is you assign a specific height to your slideshow 
+container via CSS, and typically this is what is done.  However, if you wish to have a
+fluid-width slideshow then assigning a fixed height in problematic.  Enter Cycle2's <em>auto-height</em>
+feature. Cycle2 provides two ways of managing the container's height in a way that facilitates
+simple, fluid-width designs.
+<p>
+By leveraging Cycle2's auto-height feature you can create fluid-width slideshows with simply style
+rules like this:
+<pre>.cycle-slideshow { width: 50% }
+.cycle-slideshow img { width: 100%; height: auto }</pre>
+<p>
+If you want your slideshow to be fluid-width do not assign the container or the slides a specific
+height.
+<div class=info>
+    <p>
+    The auto-height feature does not control the height of the <em>slides</em>, just the container.
+    If your slides are images which have fixed dimensions declared in the markup,
+    such as <code>&lt;img width="200" height="150" ...></code>, then you will need to either remove
+    those dimension attributes or override them in CSS if wish to use this feature.
+</div>
+
+<h2>Sentinel</h2>
+<p>
+The default auto-height behavior is to use a <em>sentinel</em> slide.  A <em>sentinel</em> slide
+is a clone of one of the slideshow's actual slides which is prepended into the slideshow
+container and given styles of <code>{ position: static; visibility: hidden }</code>.  This prevents
+the clone from being visible but also causes the container element to expand in fit the sentinel's size,
+which is what is desired.
+<p>
+By default, the slideshow's first slide is cloned as a sentinel.  You can choose a different
+slide by setting the <code>data-cycle-auto-height</code> attribute to the zero-based index
+of the slide to use.  Alternatively, you can set the attribute value to the string "calc" and
+Cycle2 will calculate the tallest slide and use it as the sentinel.
+<p>
+The example below, and most of the demos on this site, shows the default auto-height behavior in action.
+If you view the DOM using a developer tool you'll see the sentinel slide (it's the first slide
+in the container); however it is never visible and does not participate in the slide rotation. It's
+sole purpose is to manage the container height.
+
+<div class="cycle-slideshow">
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+<h2>Ratio</h2>
+<p>
+An alternative to using a sentinel slide for height management is to provide a width:height ratio.
+This is done by setting the <code>data-cycle-auto-height</code> attribute to a ratio string.  For 
+example, if your slideshow contains images that are 600 pixels wide and 400 pixels tall, you can
+enforce this ratio like this: <code>data-cycle-auto-height="600:400"</code>.  Since this is just
+a ratio it's not necessary to provide cycle with the actual slide dimensions, so the 
+declaration could be simplified to <code>data-cycle-auto-height="3:2"</code>.  If your images are
+square then a simple <code>data-cycle-auto-height="1:1"</code> will get the job done.
+<p>
+The example below sets the following attribute: <code>data-cycle-auto-height="4:3"</code>.
+If you view the DOM using a developer tool you'll see there is no sentinel slide, yet this 
+slideshow maintains it's height as you resize the page, just as the previous example.
+<div class="cycle-slideshow"
+    data-cycle-auto-height="4:3"
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+
+<h2>Disable Auto-Height</h2>
+<p>
+If you do not wish to have Cycle2 provide any auto-height capabilities, simply set the 
+<code>data-cycle-auto-height</code> attribute value to <code>false</code> and give your
+slideshow container an explicit height via CSS.  The example
+below shows a slideshow with <code>data-cycle-auto-height=false</code>.  
+Since there is no style rule on this page
+that provides a height for the slideshow container you can see that its height collapses
+to zero and the text below moves up.
+<div class="cycle-slideshow"
+    data-cycle-auto-height=false
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+<p>
+This text should be below the slideshow, but it's not.  This is what Cycle2's auto-height
+feature fixes.  Have a nice day.
+
+<h2 style="margin-top: 30%">Dynamic Container Sizing</h2>
+<p>
+There have been numerous requests for a way to resize the container based on the height of
+the current slide.  See the <a href="container-resize.html">Container Resizing</a> page for instructions on how to achieve this
+functionality.
+<p>
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

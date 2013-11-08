@@ -1,0 +1,273 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 FAQ</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="../demo/demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> FAQ</h1>
+</div>
+
+<div id="main">
+
+<dl>
+
+<dt id="whats-new">What's new in Cycle2?</dt>
+<dd>Lots!  The biggest change is how it's indended to be used, and that's <em>declaritively</em>.
+    For most cases you will never need to write script to initialize a slideshow, you simply 
+    declare your options on the slideshow element and Cycle2 takes it from there.
+    <p>Additionally, Cycle2 fully supports responsive designs!
+</dd>
+
+
+<dt id="help">How can I get help?</dt>
+<dd>If you think you've discovered a bug or wish to request a new feature, please use the
+    github <a href="https://github.com/malsup/cycle2/issues">issues page</a>.  If you
+    need personalized help please understand that I am not able to respond with free help
+    to the hundreds of monthly emails I receive.  If you wish to hire me for assistance then
+    arrangements can be made via email (I'm malsup at gmail dot com).
+</dd>
+
+
+
+<dt id="should-i-upgrade">I'm using the previous Cycle plugin, should I upgrade to Cycle2?</dt>
+<dd>Don't fix it if it isn't broken.  If you're happy with your Cycle slideshow then there's no need to update.
+    Consider trying Cylce2 on your next project to see which one you prefer.
+</dd>
+
+<!--
+<dt id="replace">Will my current Cycle1 slideshow still work if I just replace the Cycle script with Cycle2?</dt>
+<dd>Probably not, unless your slideshow uses very few options.  Cycle2 is a complete rewrite and the API
+    has changed in several ways.  <a href="cycle-to-cycle2.php">More details</a>.
+</dd>
+-->
+
+<dt id="is-cycle1-still-supported">Will the old Cycle plugin continue to be supported?</dt>
+<dd>Yes, but it won't be getting any new features.</dd>
+
+
+<dt id="can-i-use-cycle1-and-cycle2">Can I use Cycle and Cycle2 on the same page?</dt>
+<dd>No.</dd>
+
+
+<dt id="does-cycle2-work-with-old-jquery">Does Cycle2 work with jQuery 1.4, 1.5 or 1.6?</dt>
+<dd>No. Cycle2 requires jQuery 1.7 or later.</dd>
+
+
+<dt id="responsive">Does Cycle2 support responsive designs?</dt>
+<dd>Yes!</dd>
+
+
+<dt id="bower">How can I install Cycle2 via <a href="http://twitter.github.com/bower/">Bower</a>?</dt>
+<dd>
+<pre>bower install https://raw.github.com/malsup/malsup.github.com/master/jquery.cycle2.js</pre>
+Or, for the minified file:
+<pre>bower install https://raw.github.com/malsup/malsup.github.com/master/min/jquery.cycle2.min.js</pre>
+</dd>
+
+
+<dt id="non-image">I want to use slides that are not images.  How do I tell Cycle2 what my slides are?</dt>
+<dd>Use the <em>data-cycle-slides</em> attribute to provide a jQuery selector which identifies the elements
+    within the container that are slides.
+    For example, if your slideshow is a <em>ul</em> with <em>li</em> slides you would set the attribute like this:
+    <code>data-cycle-slides="li"</code>
+<pre>
+&lt;ul class="cycle-slideshow" <span class=special>data-cycle-slides="li"</span>>
+    &lt;li>&lt;img src="path/to/some/image1.jpg">&lt;/li>
+    &lt;li>&lt;img src="path/to/some/image2.jpg">&lt;/li>
+    &lt;li>&lt;img src="path/to/some/image3.jpg">&lt;/li>
+&lt;/ul>
+</pre>
+ </dd>
+
+
+<dt>How dow I bind <em>before</em> and <em>after</em> callback functions in Cycle2?</dt>
+<dd>Cycle2 triggeres events on the container so you bind them there like any jQuery event listener:
+<pre>$( '#mySlideshow' ).on( 'cycle-before', function(e, optionHash, outgoingSlideEl, incomingSlideEl, forwardFlag ) {
+    // your code to handle 'before' event
+});
+</pre>
+See the <a href="../api/index.html#events">API page</a> for a full list of Cycle2 events.
+</dd>
+
+
+<dt id="auto-init">How do I get my slideshow to initialize automatically like in the demos?</dt>
+<dd>Add the class <code>cycle-slideshow</code> to your slideshow container.  Any 
+    element with that classname will automatically be initalized as a Cycle2 slideshow.</dd>
+
+<dt id="init-not-fired">Why doesn't the <strong>cycle-initialized</strong> event fire?</dt>
+<dd>It does, I promise.  But if you bind your event listener after it has already fired then
+you won't hear it.  Double check that you're not binding too late.</dd>
+
+<dt id="log">How do I disable the console logging that Cycle2 preforms?</dt>
+<dd>Add the <code>data-cycle-log="false"</code> attribute to your slideshow container.</dd>
+
+
+<dt id="custom-template">Can I use non-mustache style templates?</dt>
+<dd>Yes.  The template expression, or even the entire <code>tmpl</code> function, can be
+    replaced to suit your needs.  See the <a href="../demo/tmpl.html">Template Customization</a>
+    demo for more information.</dd>
+
+
+<dt id="overlays-and-captions">Cycle2 supports captions and overlays... what's the difference?</dt>
+<dd>Very little really.  The Cycle2 demos show how they are intended to be used based on
+    their names, however you could just as easily use the caption for an overlay, and vice versa.
+    Ultimately, having both options facilitates having two independent ways of providing and displaying
+    slide information.
+</dd>
+
+
+<dt id="slideshow-class">Does my slideshow need to have the class "cycle-slideshow"?</dt>
+<dd>No, however that is the default class for triggering <a href="../api/index.html#auto-init">auto-initialization</a> on a Cycle2
+    slideshow. The demos on this site use that classname consistently because they auto-initialize and
+    they all include the <a href="../demo/demo-slideshow.css">same stylesheet</a> which defines style rules for that class.
+</dd>
+
+
+<dt id="multi-next-trigger">How can I have two elements work as the "next" trigger (or the "prev" trigger)?</dt>
+<dd>The <code>data-cycle-prev</code> and <code>data-cycle-next</code> attributes 
+    identify the element to use as the <em>prev</em> and <em>next</em> triggers.
+    These attribute values accept normal jQuery selectors so if you wanted
+    to have both the slideshow itself and an anchor with the class <em>next</em>
+    be triggers you would declare the attribute like this:
+    <pre>&lt;div class="cycle-slideshow"
+    <span class=special>data-cycle-next=".next, .cycle-slideshow"</span>
+    ...
+&lt;/div></pre>
+</dd>
+
+
+<dt id="effects">What effects are provided out-of-the-box?</dt>
+<dd>
+    <ul>
+    <li>fade
+    <li>fadeout
+    <li>scrollHorz
+    </ul>
+</dd>
+
+
+<dt id="fade-fadeout">What's the difference between the <em>fade</em> and <em>fadeout</em> effects?</dt>
+<dd>The <em>fade</em> transition is a <em>cross-fade</em> which means that both the incoming and outgoing
+    slide are changing opacity simultaneously.  The outgoing slide animates to zero opacity while the
+    incoming slide animates to an opacity value of 1.  With a cross-fade transition you will briefly see the
+    background of the container near the middle of the transition.
+    <p>
+    The <em>fadeout</em> transition fades only the outgoing slide to reveal the next slide.  You will 
+    never see the container background with the <em>fadeout</em> transition.
+</dd>
+
+<dt id="swipe">Do I need to include jQuery Mobile in order to use the "swipe" event?</dt>
+<dd>No, Cycle2 provides an optional <em>swipe</em> plugin that can be used
+    if your page does not include jQuery Mobile.  See <a href="../download/index.html">download page</a>.
+
+
+<dt id="dependencies">Does Cycle2 have any dependencies on other plugins?</dt>
+<dd>No, however it can leverage other plugins that are installed, such as the Easing Plugin.</dt>
+
+
+<dt id="options">What options are available?</dt>
+<dd>Supported options can be found on the <a href="../api/index.html">API page</a>.</dd>
+
+
+<dt id="fouc">Why do all my images (slides) display briefly when the page loads?</dt>
+<dd>When a web page depends on JavaScript for DOM manipulation or styling, you may see a 
+    "flash of unstyle content" because the browser may render elements before the DOM is 
+    fully loaded and before the DOMContentLoaded event is fired. 
+    Karl Swedberg wrote 
+    a <a href="http://www.learningjquery.com/2008/10/1-way-to-avoid-the-flash-of-unstyled-content">nice article</a> 
+    on this problem and how to avoid it. Karl talks about a general purpose solution, but for Cycle2 the solution 
+    is much simpler: just hide all but your first slideshow image using CSS.
+For example:
+<pre>
+#slideshow img { display: none }
+#slideshow img.first { display: block }
+...
+&lt;div id="slideshow">
+    &lt;img src="image1.jpg" width="200" height="200" class="first">
+    &lt;img src="image2.jpg" width="200" height="200">
+    &lt;img src="image3.jpg" width="200" height="200">
+&lt;/div>
+</pre>
+
+
+<!--
+<dt>How can I fade in the first slide?</dt>
+
+<dd>fade-in-first demo</dd>
+
+<dt>How can I use an external control to advance the slideshow to a particular slide?</dt>
+<dd>Check out the 'goto' demos: goto1, goto2, goto3, goto4</dd>
+
+<dt>How can I use multiple transition effects for my slideshow?</dt>
+<dd>multi effect demo</dd>
+
+<dt>How can I pause a slideshow?</dt>
+<dd>pause demo</dd>
+-->
+
+
+<dt id="bookmarkable">How can I create a slideshow with bookmarkable slides?</dt>
+<dd>Check out the <a href="../demo/bookmark.html">bookmark demo</a>.</dd>
+
+
+<dt id="tcycle">Cycle2 is over 17kb, why does it have to be so big?</dt>
+<dd>Cycle2 has a lot of features and handles a lot of edge cases.  It's intended to
+be a plugin that you can drop on any page and it <em>just works</em>.  Like Cycle1, only better.
+</dd>
+
+
+<dt id="tcycle">I just want a simple fader or scroller slideshow.  Is there a lighter-weight
+alternative?</dt>
+<dd>If you want a totally bare-bones, no-frills slideshow plugin, check out <a href="../tcycle/index.html">tCycle</a>.
+    tCycle is a responsive, declarative, auto-initializing fade/scroll slideshow plugin that weighs 
+    in at under 1000 bytes.
+</dd>
+
+
+
+<dt id="donate">How can I donate?</dt>
+<dd>:-)  Thanks for asking!  Click the button below to donate via Paypal.<p>
+    <form id="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="malsup@gmail.com">
+        <input type="hidden" name="item_name" value="Cycle2 Plugin Rocks!">
+        <!--<input type="hidden" name="amount" value="25.00"> -->
+        <input type="hidden" name="buyer_credit_promo_code" value="">
+        <input type="hidden" name="buyer_credit_product_category" value="">
+        <input type="hidden" name="buyer_credit_shipping_method" value="">
+        <input type="hidden" name="buyer_credit_user_address_change" value="">
+        <input type="hidden" name="no_shipping" value="0">
+        <input type="hidden" name="no_note" value="1">
+        <input type="hidden" name="currency_code" value="USD">
+        <input type="hidden" name="tax" value="0">
+        <input type="hidden" name="lc" value="US">
+        <input type="hidden" name="bn" value="PP-DonationsBF">
+        <button type=submit class="primary corner">
+            <img src="https://www.paypal.com/en_US/i/logo/PayPal_mark_60x38.gif" border="0" style="vertical-align:middle; margin-right:15px">
+            Donate with PayPal!
+        </button>
+        <!--<input type="image" style="width:62px" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!"> -->
+        <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
+</dd>
+
+</dl>
+
+    
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

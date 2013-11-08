@@ -1,0 +1,187 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Prev/Next</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Prev/Next</h1>
+</div>
+
+<div id="main">
+<style>
+#outside .cycle-slideshow { width: 300px }
+#prev, #next, .prevControl, .nextControl { cursor: pointer; font-size: 16px; color: #08C }
+</style>
+
+<h2 id="simple">Simple</h2>
+<p>
+You can add simple, default prev and next controls by including two elements in your
+slideshow container, one with the class <code>cycle-prev</code> and one with the 
+class <code>cycle-next</code>.
+By default, Cycle2 looks for elements with these classes within the container.
+<p>
+The default styles for these elements for this demo page are such that the controls
+will appear when you hover over the left or right part of the slideshow with your mouse,
+but of course they can be styled any way you wish.
+
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    >
+    &lt;!-- prev/next links -->
+    <span class=special>&lt;div class="cycle-prev">&lt;/div></span>
+    <span class=special>&lt;div class="cycle-next">&lt;/div></span>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+</pre>
+
+<!-- slideshow -->
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    >
+    <!-- prev/next links -->
+    <div class="cycle-prev"></div>
+    <div class="cycle-next"></div>
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+<div class=center>(hover over left or right side of slideshow)</div>
+
+
+
+<h2 id="outside-container">Outside the Container</h2>
+<p>
+It is not required to place the prev/next elements within the slideshow
+container or to use any specific classname on the prev/next elements.
+This example shows how to 
+use the <code>data-cycle-prev</code> and <code>data-cycle-next</code>
+attributes to reference controls outside of the container.
+
+<pre>
+&lt;div id=outside>
+    &lt;!-- prev/next links -->
+    &lt;div class=center>
+        <span class=special>&lt;span id=prev>&amp;lt;&amp;lt;Prev &lt;/span></span>
+        <span class=special>&lt;span id=next> Next&amp;gt;&amp;gt;&lt;/span></span>
+    &lt;/div>
+    &lt;!-- slideshow -->
+    &lt;div class="cycle-slideshow" 
+        data-cycle-fx=scrollHorz
+        data-cycle-timeout=0
+        <span class=special>data-cycle-prev="#prev"</span>
+        <span class=special>data-cycle-next="#next"</span>
+        >
+        &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+        &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+        &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+        &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+    &lt;/div>
+&lt;/div>
+</pre>
+
+<div id=outside>
+    <!-- prev/next links -->
+    <div class=center>
+        <span id=prev>&lt;&lt;Prev </span>
+        <span id=next> Next&gt;&gt;</span>
+    </div>
+    <!-- slideshow -->
+    <div class="cycle-slideshow" 
+        data-cycle-fx=scrollHorz
+        data-cycle-timeout=0
+        data-cycle-prev="#prev"
+        data-cycle-next="#next"
+        >
+        <img src="../images/p1.jpg">
+        <img src="../images/p2.jpg">
+        <img src="../images/p3.jpg">
+        <img src="../images/p4.jpg">
+    </div>
+</div>
+<p>
+Note that this is also an example of a fixed-width slideshow as the outer container
+has a width set to 300px.
+
+
+
+<h2 id="multi">Multiple Prev/Next</h2>
+<p>
+The <code>data-cycle-prev</code> and <code>data-cycle-next</code> options identify
+the element(s) to use for the prev and next controls.  To have multiple
+prev/next controls, provide a value for these options that selects multiple elements.
+
+<pre>
+&lt;!-- prev/next links -->
+&lt;div class=center>
+    &lt;span <span class=special>class="prevControl"</span>>&lt;&lt;Prev &lt;/span>
+    &lt;span <span class=special>class="nextControl"</span>> Next&gt;&gt;&lt;/span>
+&lt;/div>
+&lt;!-- slideshow -->
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    <span class=special>data-cycle-prev=".prevControl"</span>
+    <span class=special>data-cycle-next=".nextControl"</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+&lt;!-- prev/next links -->
+&lt;div class=center>
+    &lt;span <span class=special>class="prevControl"</span>>&lt;&lt;Prev &lt;/span>
+    &lt;span <span class=special>class="nextControl"</span>> Next&gt;&gt;&lt;/span>
+&lt;/div>
+</pre>
+
+<div id="multiple">
+    <!-- prev/next links -->
+    <div class=center>
+        <span class=prevControl>&lt;&lt;Prev </span>
+        <span class=nextControl> Next&gt;&gt;</span>
+    </div>
+    <!-- slideshow -->
+    <div class="cycle-slideshow" 
+        data-cycle-fx=scrollHorz
+        data-cycle-timeout=0
+        data-cycle-prev=".prevControl"
+        data-cycle-next=".nextControl"
+        >
+        <img src="../images/p1.jpg">
+        <img src="../images/p2.jpg">
+        <img src="../images/p3.jpg">
+        <img src="../images/p4.jpg">
+    </div>
+    <!-- prev/next links -->
+    <div class=center>
+        <span class=prevControl>&lt;&lt;Prev </span>
+        <span class=nextControl> Next&gt;&gt;</span>
+    </div>
+</div>
+
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

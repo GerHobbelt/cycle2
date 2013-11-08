@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Swipe</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Swipe</h1>
+</div>
+
+<div id="main">
+
+<style>
+#meta { margin: 40px auto; color: #666; text-align: center }
+</style>
+<script src="../../jquery.cycle2.swipe.js"></script>
+<script src="../js/ios6fix.js"></script>
+
+
+<div class=info>
+<p>
+NOTE: iOS6 has a bug which causes the swipe functionality to malfunction in certain cases.
+A fix for this iOS6 bug has been provided by kTmnh via this gist: 
+<a href="https://gist.github.com/3798925">https://gist.github.com/3798925</a>. 
+<p>
+I have saved the source code for that gist at 
+<a href="../js/ios6fix.js">http://malsup.github.io/ios6fix.js</a>.
+For proper swipe behavior on iOS6, include this fix on your page (conditionally, ideally)
+and follow the remaining instructions below.
+</div>
+
+<p>
+Cycle2 supports the swipe gesture for advancing slides on touch devices.  
+If you are not using jQuery Mobile on your page then you will need to include Cycle2's 
+swipe event plugin which can be found on the <a href="../download/index.html">Download page</a>.
+
+<p>
+On mobile devices, swipe left and right on the demo below to move forward and back through the slides</p>
+<p>
+To bind swipe events to the prev and next actions you simply set the
+<code>data-cycle-swipe</code> option to <code>true</code>.
+
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    <span class=special>data-cycle-swipe=true</span>
+    data-cycle-prev=".prev"
+    data-cycle-next=".next"
+    >
+    &lt;div class="cycle-caption">&lt;/div>
+
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+</pre>
+
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    data-cycle-prev=".prev"
+    data-cycle-next=".next"
+    data-cycle-swipe=true
+    >
+    <div class="cycle-caption"></div>
+
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+<p class=center>Traditional prev/next links can be used as well:</p>
+
+<div class=center>
+    <a href=# class="prev">&lt;&lt;Prev</a>
+    &nbsp;&nbsp;&nbsp;
+    <a href=# class="next">Next&gt;&gt;</a>
+</div>
+
+<script src="../../jquery.cycle2.swipe.js"></script>
+<script>
+(function() {
+    var $w = $(window)
+
+    var markup = '<p id="meta"><span>Window size: '
+        + '<span id="winsize">' + $w.width() + 'x' + $w.height() + '</span>'
+        + '<br>Screen size: ' + screen.width + 'x' + screen.height
+        + '<br>Device pixel ratio: ' + window.devicePixelRatio
+        + '<br>Pixel depth: ' + screen.pixelDepth
+        + '<br>Touch support: ' + ('ontouchend' in document);
+
+    $(document.body).append( markup );
+
+    $w.on( 'resize', function() {
+        $('#winsize').html( $w.width() + 'x' + $w.height() );
+    });
+})();
+</script>
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

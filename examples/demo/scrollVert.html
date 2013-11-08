@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Scroll Vert</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Scroll Vert</h1>
+</div>
+
+<div id="main">
+
+<script src="../../jquery.cycle2.scrollVert.js"></script>
+
+<div class=info>
+    <p>
+    Cycle2's <em>scrollVert</em> transition plugin must be included in order to use the scrollVert effect.  See the
+    <a href="../download/index.html">Download page</a> for a link to download the scrollVert plugin.
+</div>
+
+<p>
+The scrollVert effect is achieved by assignin the <code>fx</code> option to <code>scrollVert</code>.
+
+
+<h2 id="simple">Simple</h2>
+<pre>
+&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">&lt;/script>
+&lt;script src="http://jquery.malsup.com/cycle2/jquery.cycle2.js">&lt;/script>
+<span class=special>&lt;script src="http://jquery.malsup.com/cycle2/jquery.cycle2.scrollVert.js">&lt;/script></span>
+
+...
+
+&lt;div class="cycle-slideshow"
+    <span class=special>data-cycle-fx="scrollVert"</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+</pre>
+
+<div class="cycle-slideshow"
+    data-cycle-prev=".prev"
+    data-cycle-next=".next"
+    data-cycle-fx="scrollVert"
+    >
+    <!-- prev/next links -->
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+<div class=center>
+    <span class="prev"><a href=#>&and; Prev &and;</a></span>
+    <span class="next" style="margin-left:40px"><a href=#>&or; Next &or;</a></span>
+</div>
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

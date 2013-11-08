@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Template Customization</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Template Customization</h1>
+</div>
+
+<div id="main">
+
+<p>
+This page demonstrates how Cycle2's default template regex can be replaced.
+The <code>data-cycle-tmpl-regex</code> attribute can be used to provide a custom
+regular expression for template tokenization.  The default regex
+is <code>{{((.)?.*?)}}</code> which facilitates mustache-style template. However if you 
+prefer not to use double curly braces you can provide your own expression as show in the 
+examples on this page.
+<p>
+Also note that, if you wish, you can replace Cycle2's <code>tmpl</code> API method
+completely by binding to the cycle-bootstrap event:
+<pre>
+// attach handler to bootstrap event
+$( document ).on('cycle-bootstrap', function( e, opts, API ) {
+    // replace default tmpl method in Cycle2 API
+    API.tmpl = function( templateString, opts, contextElement ) {
+        return str.replace(regex, function(_, str) {
+            // custom tokenization (your code here)
+            return opts[str] || contextElement[str];
+        });
+    }
+});
+</pre>
+
+<h2>[[slideNum]]</h2>
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-tmpl-regex="\[\[((\.)?.*?)\]\]"
+    data-cycle-pager-template="&lt;a href=#> [[slideNum]] &lt;/a>"
+    ...
+</pre>
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    data-cycle-pager="#pager1"
+    data-cycle-tmpl-regex="\[\[((\.)?.*?)\]\]"
+    data-cycle-pager-template="<a href=#> [[slideNum]] </a>"
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+<div id="pager1" class="center"></div>
+
+<h2>**slideNum**</h2>
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-tmpl-regex="\*\*((\.)?.*?)\*\*"
+    data-cycle-pager-template="&lt;a href=#> **slideNum** &lt;/a>"
+    ...
+</pre>
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    data-cycle-pager="#pager2"
+    data-cycle-tmpl-regex="\*\*((\.)?.*?)\*\*"
+    data-cycle-pager-template="<a href=#> **slideNum** </a>"
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+<div id="pager2" class="center"></div>
+
+<h2>%slideNum%</h2>
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-tmpl-regex="%((\.)?.*?)%"
+    data-cycle-pager-template="&lt;a href=#> %slideNum% &lt;/a>"
+    ...
+</pre>
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=0
+    data-cycle-pager="#pager3"
+    data-cycle-tmpl-regex="%((\.)?.*?)%"
+    data-cycle-pager-template="<a href=#> %slideNum% </a>"
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+<div id="pager3" class="center"></div>
+
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

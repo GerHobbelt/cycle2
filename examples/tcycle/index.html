@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 tCycle</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="../demo/demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> tCycle</h1>
+</div>
+
+<div id="main">
+
+<h2>"t" Stands for "Tiny"</h2>
+<p>
+And by "tiny" I mean less than 1000 bytes.
+<p>
+tCycle is a minimalist jQuery slideshow plugin that won't blow your bandwidth budget.
+It supports the following features:
+<ul>
+<li>Auto-initialization
+<li>Declarative options
+<li>Variable timeout
+<li>Variable speed
+<li>Cross-fade transitions
+<li>Scroll transitions
+</ul>
+
+<h2>How to Use tCycle</h2>
+<p>
+Like Cycle2, tCycle is <em>very</em> easy to use.  Easier actually, since there is less it
+can do.
+<h3>Step 1: Include the necessary scripts</h3>
+<pre>
+&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">&lt;/script>
+&lt;script src="http://malsup.github.com/<span class=special>jquery.tcycle.js</span>">&lt;/script>
+</pre>
+
+<h3>Step 2: Declare your markup</h3>
+<pre>
+&lt;div <span class=special>class="tcycle"</span>>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+</pre>
+
+<p>
+Optional attributes for the container element:
+<table>
+<thead><tr><th>Attribute<th>Default Value<th>Description</tr></thead>
+<tr><td>data-fx<td>"fade"<td>The name of the effect to use.  Set to "scroll" for a scrolling slideshow.
+<tr><td>data-speed<td>500<td>Number of ms for transtions to complete.
+<tr><td>data-timeout<td>4000<td>Number of ms between transitions.
+</table>
+
+<h3>Step 3: Have a nice day</h3>
+
+<h2>Demo</h2>
+    <a class="button corner" href="basic.html">Basic Demo</a>
+
+<h2>Download</h2>
+    <a class="button corner" href="../../jquery.tcycle.js">Download tCycle</a>
+
+<h2>Donate!</h2>
+    <form id="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="malsup@gmail.com">
+        <input type="hidden" name="item_name" value="tCycle Plugin scratches my itch">
+        <!--<input type="hidden" name="amount" value="25.00"> -->
+        <input type="hidden" name="buyer_credit_promo_code" value="">
+        <input type="hidden" name="buyer_credit_product_category" value="">
+        <input type="hidden" name="buyer_credit_shipping_method" value="">
+        <input type="hidden" name="buyer_credit_user_address_change" value="">
+        <input type="hidden" name="no_shipping" value="0">
+        <input type="hidden" name="no_note" value="1">
+        <input type="hidden" name="currency_code" value="USD">
+        <input type="hidden" name="tax" value="0">
+        <input type="hidden" name="lc" value="US">
+        <input type="hidden" name="bn" value="PP-DonationsBF">
+        <button type=submit class="primary corner">
+            <img src="https://www.paypal.com/en_US/i/logo/PayPal_mark_60x38.gif" border="0" style="vertical-align:middle; margin-right:15px">
+            Donate with PayPal!
+        </button>
+        <!--<input type="image" style="width:62px" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!"> -->
+        <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

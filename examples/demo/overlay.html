@@ -1,0 +1,135 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Overlays</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Overlays</h1>
+</div>
+
+<div id="main">
+<style>
+.cycle-overlay.custom { text-align: right; }
+button { margin-top: 40px }
+</style>
+
+
+<h2 id="simple">Simple</h2>
+<p>
+You can add a simple, default overlay by including an empty div in your
+slideshow container with the class <code>cycle-overlay</code>.
+The default overlay displays text found in the <code>data-cycle-title</code> and
+<code>data-cycle-desc</code> attributes on the slides.
+
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    >
+    &lt;!-- empty element for overlay -->
+    <span class=special>&lt;div class="cycle-overlay">&lt;/div></span>
+
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg" 
+        <span class=special>data-cycle-title="Spring"</span> 
+        <span class=special>data-cycle-desc="Sonnenberg Gardens"</span>>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg" 
+        <span class=special>data-cycle-title="Redwoods"</span> 
+        <span class=special>data-cycle-desc="Muir Woods National Monument"</span>>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg" 
+        <span class=special>data-cycle-title="Angel Island"</span> 
+        <span class=special>data-cycle-desc="San Franscisco Bay"</span>>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg" 
+        <span class=special>data-cycle-title="Raquette Lake"</span> 
+        <span class=special>data-cycle-desc="Adirondack State Park"</span>>
+&lt;/div>
+</pre>
+
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    data-auto-height="1000:750"
+    >
+    <!-- empty element for overlay -->
+    <div class="cycle-overlay"></div>
+
+    <img src="../images/p1.jpg" data-cycle-title="Spring" data-cycle-desc="Sonnenberg Gardens">
+    <img src="../images/p2.jpg" data-cycle-title="Redwoods" data-cycle-desc="Muir Woods National Monument">
+    <img src="../images/p3.jpg" data-cycle-title="Angel Island" data-cycle-desc="San Franscisco Bay">
+    <img src="../images/p4.jpg" data-cycle-title="Raquette Lake" data-cycle-desc="Adirondack State Park">
+</div>
+<p>
+See <a href="demo-slideshow.css">demo-slideshow.css</a> for the overlay styles that are being
+applied in this demo.
+
+
+
+<h2 id="custom">Custom Template</h2>
+<p>
+Overlays are created using the template string found in the
+<code>overlay-template</code> option.  The default value for that option
+is <code>'&lt;div>{{title}}&lt;/div>&lt;div>{{desc}}&lt;/div>'</code> 
+as can be seen in the example above.  Values for the replacement tokens <code>title</code> and
+<code>desc</code> are extracted from the attributes of the slides.
+
+<p>
+To override the default overlay template and create custom overlays simply declare a
+<code>data-cycle-overlay-template</code> attribute and set its value to your desired
+template string. Template strings support a Mustache-style syntax by default.  For example,
+to create overlays with even more information:
+
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    <span class=special>data-cycle-overlay-template="&lt;span class=left>&amp;nbsp;&lt;br>{{slideNum}} / {{slideCount}}&lt;/span>{{date}} - {{title}}&lt;br>{{desc}}"</span>
+    >
+    &lt;!-- empty element for overlay -->
+    &lt;div class="cycle-overlay custom">&lt;/div>
+
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg" data-date="May, 2012"  data-title="Sonnenberg Gardens" data-cycle-desc="Sonnenberg Gardens">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg" data-date="June, 2012" data-title="Redwoods" data-cycle-desc="Muir Woods National Monument">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg" data-date="June, 2012" data-title="Angel Island" data-cycle-desc="San Franscisco Bay">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg" data-date="July, 2012" data-title="Raquette Lake" data-cycle-desc="Adirondack State Park">
+&lt;/div>
+</pre>
+
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    data-cycle-overlay-template="<span class=left>&nbsp;<br>{{slideNum}} / {{slideCount}}</span>{{date}} - {{title}}<br>{{desc}}"
+    >
+    <!-- empty element for overlay -->
+    <div class="cycle-overlay custom"></div>
+    <img src="../images/p1.jpg" data-date="May, 2012" data-title="Spring" data-cycle-desc="Sonnenberg Gardens">
+    <img src="../images/p2.jpg" data-date="June, 2012" data-title="Redwoods" data-cycle-desc="Muir Woods National Monument">
+    <img src="../images/p3.jpg" data-date="June, 2012" data-title="Angel Island" data-cycle-desc="San Franscisco Bay">
+    <img src="../images/p4.jpg" data-date="July, 2012" data-title="Raquette Lake" data-cycle-desc="Adirondack State Park">
+</div>
+
+<p>
+Notice in this example that the <code>data-cycle-title</code> attribute shown in the earlier example
+has been shortened to just <code>data-title</code> and is then referenced with the 
+<code>{{title}}</code> replacement token.  These <em>extra</em> metadata attributes can be named
+however you wish.
+
+<h2>More...</h2>
+<p>
+For more options, check out the <a href="caption2.html">animated caption/overlay demos</a>.
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

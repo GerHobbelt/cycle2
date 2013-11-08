@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Pause On Hover</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Pause On Hover</h1>
+</div>
+
+<div id="main">
+
+<style>
+#pauser { width: 45%; padding: 30px; margin: auto; text-align: center; font-size: 16px }
+</style>
+
+<h2>Default</h2>
+<p>
+The typical use case for pausing a slideshow on a hover event is to pause when the mouse is over
+the slideshow.  This is accomplished by setting the <code>data-cycle-pause-on-hover</code> 
+attribute value to <code>true</code>.
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=fadeout
+    data-cycle-timeout=1000
+    <span class=special>data-cycle-pause-on-hover="true"</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    ...
+&lt;/div>
+</pre>
+<div class="cycle-slideshow" 
+    data-cycle-fx=fadeout
+    data-cycle-timeout=1000
+    data-cycle-pause-on-hover=true
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+<h2>Specify an Element</h2>
+<p>
+To support pause-on-hover functionality for an element other than the slideshow itself you can set
+the value of the <code>data-cycle-pause-on-hover</code> attribute to a jQuery selector string
+which identifies an element (or elements).  Cycle2 will then bind the hover logic to the specified
+element instead of the slideshow container.
+<pre>
+&lt;div <span class=special>id="pauser"</span> class="info">Hover over me to pause 2nd slideshow&lt;/div>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=fadeout
+    data-cycle-timeout=1000
+    <span class=special>data-cycle-pause-on-hover="#pauser"</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    ...
+&lt;/div>
+</pre>
+
+<div id="pauser" class="info">Hover over me to pause 2nd slideshow</div>
+<div class="cycle-slideshow" 
+    data-cycle-fx=fadeout
+    data-cycle-timeout=1000
+    data-cycle-pause-on-hover="#pauser"
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

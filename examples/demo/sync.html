@@ -1,0 +1,119 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Synchronized Slideshows</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Synchronized Slideshows</h1>
+</div>
+
+<div id="main">
+
+<script src="../../jquery.cycle2.scrollVert.js"></script>
+
+
+<style>
+.cycle-slideshow { max-width: 300px; display: inline-block; margin: 0 }
+#container { width: 600px; margin: auto }
+</style>
+
+<p>View source for details.
+
+<div id=container>
+    <div class="cycle-slideshow" 
+        data-cycle-fx=scrollHorz
+        data-cycle-reverse=true
+        data-cycle-timeout=0
+        data-index=1
+        >
+        <img src="../images/beach1.jpg">
+        <img src="../images/beach2.jpg">
+        <img src="../images/beach3.jpg">
+        <img src="../images/beach4.jpg">
+    </div>
+
+    <div class="cycle-slideshow" 
+        data-cycle-fx=scrollVert
+        data-cycle-timeout=0
+        data-index=2
+        >
+        <img src="../images/beach1.jpg">
+        <img src="../images/beach2.jpg">
+        <img src="../images/beach3.jpg">
+        <img src="../images/beach4.jpg">
+    </div>
+
+    <div class="cycle-slideshow" 
+        data-cycle-fx=scrollVert
+        data-cycle-timeout=0
+        data-cycle-reverse=true
+        data-index=4
+        >
+        <img src="../images/beach1.jpg">
+        <img src="../images/beach2.jpg">
+        <img src="../images/beach3.jpg">
+        <img src="../images/beach4.jpg">
+    </div>
+
+    <div class="cycle-slideshow" 
+        data-cycle-fx=scrollHorz
+        data-cycle-timeout=0
+        data-index=3
+        >
+        <img src="../images/beach1.jpg">
+        <img src="../images/beach2.jpg">
+        <img src="../images/beach3.jpg">
+        <img src="../images/beach4.jpg">
+    </div>
+</div>
+
+<script>
+(function() {
+"use strict";
+
+var slideshows = $('.cycle-slideshow');
+
+// optional: sort the slideshow collection based on the value of the data-index attribute
+Array.prototype.sort.call( slideshows, function(a, b) {
+    a = $(a).data('index'), b = $(b).data('index');
+    return a < b ? -1 : a > b ? 1 : 0;
+});
+
+// bind to cycle-after to trigger next slideshow's transition
+$('#container').on('cycle-after', function(e) {
+    var index = slideshows.index(e.target);
+    transitionNext(index);
+});
+
+// trigger the initial transition after 1 second
+setTimeout(transitionNext, 1000);
+
+function transitionNext( index ) {
+    if (index === undefined || index == slideshows.length -1 )
+        index = 0;
+    else
+        index++;
+
+    slideshows.eq(index).cycle('next');
+}
+
+})();
+</script>
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

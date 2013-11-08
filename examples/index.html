@@ -1,0 +1,215 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 </title>
+<link rel=stylesheet href="site.css">
+<link rel=stylesheet href="demo/demo-slideshow.css">
+<script src="./js/jquery.js"></script>
+<script src="../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="index.html"><img id=logo src="logo.png" width=48 height=48></a> Cycle2</h1>
+</div>
+
+<div id="main">
+
+<script src="../jquery.cycle2.shuffle.js"></script>
+<script src="../jquery.cycle2.tile.js"></script>
+<script src="../jquery.cycle2.flip.js"></script>
+
+<style>
+#flip { background: none }
+.cycle-slideshow { width: 23%; float: left; margin: 1%; min-width: 50px }
+.cycle-slideshow img { display: none }
+.cycle-slideshow img.first { display: block }
+@media only screen and (max-width: 600px) {
+    .cycle-slideshow { width: 31%; float: left; margin: 1% }
+    .cycle-slideshow + .cycle-slideshow + .cycle-slideshow + .cycle-slideshow { display: none }
+}
+@media only screen and (max-width: 500px) {
+    .cycle-slideshow { width: 48%; float: left; margin: 1% }
+    .cycle-slideshow + .cycle-slideshow + .cycle-slideshow { display: none }
+}
+</style>
+
+<!--[if lte IE 7]>
+<style>
+div.section { width: 100%; float: none; padding: 10px; }
+</style>
+<![endif]-->    
+
+<div class="cycle-slideshow" c
+    data-cycle-fx='fadeout' 
+    data-cycle-auto-height="4:3"
+    data-cycle-delay="-1500"
+    >
+    <img src="images/p1.jpg" data-cycle-fx="tileBlind" data-tile-vertical=false class=first>
+    <img src="images/p2.jpg">
+    <img src="images/p3.jpg" data-cycle-fx="tileBlind">
+    <img src="images/p4.jpg">
+</div>
+<div class="cycle-slideshow" 
+    data-cycle-fx='scrollHorz' 
+    data-cycle-auto-height="4:3"
+    data-cycle-delay="-500"
+    >
+    <img src="images/p2.jpg" class=first>
+    <img src="images/p3.jpg">
+    <img src="images/p4.jpg">
+    <img src="images/p1.jpg">
+</div>
+<div class="cycle-slideshow" 
+    data-cycle-fx='tileSlide' 
+    data-cycle-auto-height="4:3"
+    data-cycle-speed=500
+    data-cycle-delay="500"
+    >
+    <img src="images/p3.jpg" class=first>
+    <img src="images/p4.jpg" data-cycle-tile-count=10 data-cycle-tile-vertical=false>
+    <img src="images/p1.jpg">
+    <img src="images/p2.jpg">
+</div>
+<div id=flip class="cycle-slideshow" 
+    data-cycle-fx='flipHorz' 
+    data-cycle-auto-height="4:3"
+    data-cycle-delay="1500"
+    >
+    <img src="images/p4.jpg" class=first data-cycle-fx=flipVert>
+    <img src="images/p1.jpg">
+    <img src="images/p2.jpg" data-cycle-fx=flipVert>
+    <img src="images/p3.jpg">
+</div>
+
+<div class="center clear">
+    <span class="main-link"><a href="download/index.html">Download</a></span>
+    <span class="main-link"><a href="demo/index.html">Demos</a></span>
+    <span class="main-link"><a href="api/index.html">API</a></span>
+    <span class="main-link"><a href="faq/index.html">FAQ</a></span>
+</div>
+
+<div class=section>
+<h2>Overview</h2>
+    <p>
+    Cycle2 is a versatile slideshow plugin for jQuery built around ease-of-use.  It supports 
+    a declarative initialization style that allows full customization without 
+    any scripting.  Simply include the plugin, declare your markup, and Cycle2
+    does the rest.
+    <p>Highlights:
+    <ul>
+    <li>Supports all browswers
+    <li>Declarative: no scripting needed!
+    <li>Responsive: fully control your slideshow via css (resize this page to see!)
+    <li>Customizable: per-slide option overrides 
+    <li>Extensible: fully customizable API (on a per-slideshow basis if you wish)
+    <li>Smart: supports image loading and delayed initialization
+    <li>Smarter: supports progressive image loading
+    <li>Out-of-the-box functionality for pagers, captions, overlays, and prev/next controls
+    <li>Support for swipe gesture on mobile devices
+    <li>Fade, scroll, shuffle, tile and carousel transitions
+    <li>Bookmarkable slides
+    <li>And lots more!
+    </ul>
+</div>
+
+<div class=section>
+<h2>How it Works</h2>
+    <p>It's very simple really, even your grandmother could use it.  It goes like this:
+    <ul>
+    <li>Include jQuery and the Cycle2 plugin on your page.
+    <li>Declare your slideshow markup as shown in the numerous demos.
+    <li>Sit back and enjoy your slideshow while sipping a cool beverage.
+    </ul>
+    <p>
+    Need more details? Ok, here's the deal:
+    Cycle2 provides a plugin function called <code>cycle</code>.  That function is invoked
+    on a container element. 
+    Each image in the container becomes a "slide". Options control how and when the slides are transitioned.
+    But here's the thing... you don't have to call <code>cycle</code> and pass your options.  You declare
+    your options as attributes on the slideshow element and Cycle2 grabs them from there.  
+    <p>
+    What's that you say?  You'd rather set your options via script than in the markup?  Ok fine, have it your
+    way.  You don't <em>have</em> to declare your options in the markup (but it's fun!), you can
+    invoke <code>cycle</code> from your own code and pass your options in the old-fashioned way.
+    You can even grab hold of the API object and inject your own implementation of any 
+    of the API methods that you choose.  
+</div>
+
+<div class="section clear">
+<h2>Responsive</h2>
+    <p>
+    Use media queries... don't use media queries... whatever.  Cycle2 doesn't care; it's the
+    honeybadger of slideshows plugins.  Most of the demos on this site use fluid slideshow designs
+    where the slideshow size adjusts as the window is resized.  This is accompolished by a simple
+    style rule like this: <code class=unit>.cycle-slideshow { width: 45% }</code>.  Your slideshows
+    can be fixed-width or fluid-width, or they can adapt to media query breakpoints.  You decide!
+</div>
+
+<div class=section>
+<h2>Donations</h2>
+    <p>
+    Donations are a great way to say <em>"Thank you, malsup"</em>.  I know you want to, so don't be shy.
+    All donations are greatly appreciated and help fund future development.
+    <p>Go ahead, click the button! 
+    <form id="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="malsup@gmail.com">
+        <input type="hidden" name="item_name" value="Cycle2 Plugin Rocks!">
+        <!--<input type="hidden" name="amount" value="25.00"> -->
+        <input type="hidden" name="buyer_credit_promo_code" value="">
+        <input type="hidden" name="buyer_credit_product_category" value="">
+        <input type="hidden" name="buyer_credit_shipping_method" value="">
+        <input type="hidden" name="buyer_credit_user_address_change" value="">
+        <input type="hidden" name="no_shipping" value="0">
+        <input type="hidden" name="no_note" value="1">
+        <input type="hidden" name="currency_code" value="USD">
+        <input type="hidden" name="tax" value="0">
+        <input type="hidden" name="lc" value="US">
+        <input type="hidden" name="bn" value="PP-DonationsBF">
+        <button type=submit class="primary corner">
+            <img src="https://www.paypal.com/en_US/i/logo/PayPal_mark_60x38.gif" border="0" style="vertical-align:middle; margin-right:15px">
+            Thanks, malsup!
+        </button>
+        <!--<input type="image" style="width:62px" src="https://www.paypal.com/en_US/i/btn/x-click-but04.gif" border="0" name="submit" alt="Make payments with PayPal - it's fast, free and secure!"> -->
+        <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1">
+    </form>
+</div>
+
+<hr>
+
+<div class="section clear">
+    <blockquote class="twitter-tweet"><p>Cycle 2 is the definitive jQuery slideshow tool. It&#39;s the bees knees! <a href="http://t.co/QKfeYIvZVu">http://t.co/QKfeYIvZVu</a> thanks <a href="https://twitter.com/malsup">@malsup</a>!</p>&mdash; Ryan Battles (@ryanbattles) <a href="https://twitter.com/ryanbattles/statuses/347803397451313153">June 20, 2013</a></blockquote>
+</div>
+<div class=section>
+    <blockquote class="twitter-tweet"><p>Occasionally you see plugins with a donate button, Cycle 2 deserves every penny donated. Cap doff to <a href="https://twitter.com/malsup">@malsup</a> <a href="http://t.co/tKktpyFK5S">http://t.co/tKktpyFK5S</a> <a href="https://twitter.com/search?q=%23jquery&amp;src=hash">#jquery</a></p>&mdash; JohnM (@johnniefp) <a href="https://twitter.com/johnniefp/statuses/353101133146890240">July 5, 2013</a></blockquote>
+</div>
+<div class=section>
+    <blockquote class="twitter-tweet"><p>Cycle2, the best jQuery carosel by miles: <a href="http://t.co/6ScP7R8UiV">http://t.co/6ScP7R8UiV</a></p>&mdash; Adao Design (@adaodesign) <a href="https://twitter.com/adaodesign/statuses/380674296051695616">September 19, 2013</a></blockquote>
+</div>
+<div class=section>
+    <blockquote class="twitter-tweet"><p>Dunno how <a href="https://twitter.com/malsup">@malsup</a> does it but boy oh boy do I love Cycle2.</p>&mdash; Nick (@nfreader) <a href="https://twitter.com/nfreader/statuses/382535283348361216">September 24, 2013</a></blockquote>
+</div>
+<div class=section>
+    <blockquote class="twitter-tweet"><p>How did I miss this - my favourite (free) JQuery carousel plugin has a new <a href="https://twitter.com/search?q=%23RWD&amp;src=hash">#RWD</a> version. Good work, thanks <a href="https://twitter.com/malsup">@malsup</a> <a href="http://t.co/g0cUkS6TWL">http://t.co/g0cUkS6TWL</a></p>&mdash; Jonny a (@jonnyauk) <a href="https://twitter.com/jonnyauk/statuses/347281020237791233">June 19, 2013</a></blockquote>
+</div>
+<div class=section>
+    <blockquote class="twitter-tweet"><p>If you&#39;re looking for a jQuery Responsive &#39;slider&#39;, and used to love <a href="https://twitter.com/malsup">@malsup</a>&#39;s Cycle, go have a look at Cycle2. Quickest implementation yet.</p>&mdash; mere development (@meredevelopment) <a href="https://twitter.com/meredevelopment/statuses/382456895413301248">September 24, 2013</a></blockquote>
+</div>
+<div class=section>
+    <blockquote class="twitter-tweet"><p><a href="https://twitter.com/search?q=%23jQuery&amp;src=hash">#jQuery</a> Cycle 2 plugin behaves SO WELL. SO well. <a href="http://t.co/ShyVdb1gcU">http://t.co/ShyVdb1gcU</a></p>&mdash; carolinecblaker (@carolinecblaker) <a href="https://twitter.com/carolinecblaker/statuses/382521206982705153">September 24, 2013</a></blockquote>
+</div>
+<div class=section>
+    <blockquote class="twitter-tweet"><p><a href="https://twitter.com/malsup">@malsup</a> New jQuery Cycle2 is brilliant, center plugin is such a time saver <a href="http://t.co/7wBXMODt26">http://t.co/7wBXMODt26</a></p>&mdash; Ben Palmer (@benpalmer) <a href="https://twitter.com/benpalmer/statuses/372308315549609985">August 27, 2013</a></blockquote>
+</div>
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

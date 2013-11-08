@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Progress Bar</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Progress Bar</h1>
+</div>
+
+<div id="main">
+
+<style>
+#progress { position: absolute; bottom: 0; height: 6px; width: 0px; background: #c00; z-index: 500; }
+</style>
+
+<p>
+This demo shows how you can listen to Cycle events in order to synchronize other interface updates, in this case,
+a progressbar.
+
+<div class="cycle-slideshow" 
+    data-cycle-fx="fadeout"
+    data-cycle-pause-on-hover=true
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+    <div id="progress"></div>
+</div>
+
+<p>
+Below is the script which controls the progressbar.
+<pre>
+&lt;script>
+var progress = $('#progress'),
+    slideshow = $( '.cycle-slideshow' );
+
+slideshow.on( 'cycle-initialized cycle-before', function( e, opts ) {
+    progress.stop(true).css( 'width', 0 );
+});
+
+slideshow.on( 'cycle-initialized cycle-after', function( e, opts ) {
+    if ( ! slideshow.is('.cycle-paused') )
+        progress.animate({ width: '100%' }, opts.timeout, 'linear' );
+});
+
+slideshow.on( 'cycle-paused', function( e, opts ) {
+   progress.stop(); 
+});
+
+slideshow.on( 'cycle-resumed', function( e, opts, timeoutRemaining ) {
+    progress.animate({ width: '100%' }, timeoutRemaining, 'linear' );
+});
+&lt;/script>
+</pre>
+
+<script>
+var progress = $('#progress'),
+    slideshow = $( '.cycle-slideshow' );
+
+slideshow.on( 'cycle-initialized cycle-before', function( e, opts ) {
+    progress.stop(true).css( 'width', 0 );
+});
+
+slideshow.on( 'cycle-initialized cycle-after', function( e, opts ) {
+    if ( ! slideshow.is('.cycle-paused') )
+        progress.animate({ width: '100%' }, opts.timeout, 'linear' );
+});
+
+slideshow.on( 'cycle-paused', function( e, opts ) {
+   progress.stop(); 
+});
+
+slideshow.on( 'cycle-resumed', function( e, opts, timeoutRemaining ) {
+    progress.animate({ width: '100%' }, timeoutRemaining, 'linear' );
+});
+</script>
+
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

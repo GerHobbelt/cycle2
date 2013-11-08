@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Image Loader</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Image Loader</h1>
+</div>
+
+<div id="main">
+
+<style>
+.cycle-slideshow { width: 300px; height: 225px; margin: auto; text-align: center }
+.cycle-slideshow div.slide { width: 100%; height: 100% }
+.cycle-pager { position: static }
+</style>
+
+<div class=info>
+<p>
+The slideshows on this page contain images that have large file sizes (500+ kb) in order to demonstrate
+Cycle2's image loading facilities.  
+</div>
+
+<h2>Why use an image loader?</h2>
+<p>
+Normally, when you start a slideshow it initializes and begins without concern for whether or not
+the slides contain images or if those images have been loaded by the browser.  This can
+lead to undesirable behavior if an image has not yet loaded when it is it's turn to be displayed.
+This is where an image loader can be of assistance.  
+<p>
+Cycle2 supports an attribute named <code>data-cycle-loader</code> which can be used
+to specify the type of loading behavior for your slideshow.  The default value for this
+attribute is <code>false</code> which means that no special loading support is provided.
+<p>
+Setting the <code>data-cycle-loader</code> attribute to <code>true</code> instructs
+Cycle2 to delay adding slides to the slideshow until the images for that slide have been fully downloaded
+from the server.  As soon as at least two slides are ready the slideshow will 
+initialize and begin, and the remaining slides will be added to the initialized slideshow as
+their images arrive.
+<p>
+Setting the <code>data-cycle-loader</code> attribute to the value <code>"wait"</code>
+instructs Cycle2 to delay slideshow initialization until all images declared in the slideshow have been 
+downloaded.
+<p>
+The difference between these two settings is in the delay before initialization and
+in the order of the slides.  Since the <code>data-cycle-loader="wait"</code> option
+instructs Cycle2 to delay the slideshow initialization until all slides have loaded,
+there will likely be a very perceptible delay before the slideshow is visible.
+And since the <code>data-cycle-loader=true</code> option
+instructs Cycle2 to add slides to the slideshow as they arrive from the server, 
+the slides may be displayed in an order that is different than the markup.
+
+
+<h2 id="wait">loader=wait</h2>
+<p>
+With <code>data-cycle-loader</code> set to <code>"wait"</code> the slides will always be displayed
+in their natural, markup order.  However the slideshow will not begin until all images within
+its slides have been loaded.
+<pre>&lt;div class="cycle-slideshow" 
+    <span class=special>data-cycle-loader="wait"</span>
+    ...
+&lt;/div>
+</pre>
+
+<div class="cycle-slideshow" 
+    data-cycle-loader=wait
+    data-cycle-auto-height=false
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    data-cycle-pager="#pager1"
+    >
+    <img src="../images/p1-large.jpg">
+    <img src="../images/p2-large.jpg">
+    <img src="../images/p3-large.jpg">
+    <img src="../images/p4-large.jpg">
+</div>
+<div class="cycle-pager" id=pager1></div>
+
+
+
+<h2 id="true">loader=true</h2>
+<p>
+With <code>data-cycle-loader</code> set to <code>true</code> the slides may not be displayed
+in their natural order since they will be added to the slideshow as they arrive.
+However the slideshow will initialize as soon as two slides are available.
+
+<pre>&lt;div class="cycle-slideshow" 
+    <span class=special>data-cycle-loader=true</span>
+    ...
+&lt;/div>
+</pre>
+
+<div class="cycle-slideshow" 
+    data-cycle-loader=true
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    data-cycle-pager="#pager2"
+    data-cycle-auto-height=false
+    >
+    <img src="../images/p1-large.jpg">
+    <img src="../images/p2-large.jpg">
+    <img src="../images/p3-large.jpg">
+    <img src="../images/p4-large.jpg">
+</div>
+<div class="cycle-pager" id=pager2></div>
+
+
+
+<h2 id="non-image">Non-Image Slides</h2>
+<p>
+Your slides do not have to be images in order to take advantage of Cycle2's
+loader capabilities.  Your slides can be divs, or other elements that
+contain images, and Cycle2's loader functionality will handling them properly.
+The example below shows a slideshow with divs as slides, and those divs
+contain divs and images.
+<div class="cycle-slideshow" 
+    data-cycle-loader=wait
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=2000
+    data-cycle-pager="#pager3"
+    data-cycle-auto-height=false
+    data-cycle-slides="div.slide"
+    >
+    <div class=slide>
+        <img src="../images/p1-large.jpg">
+        <div class=cycle-overlay>Sonnenberg Gardens</div>
+    </div>
+    <div class=slide>
+        <img src="../images/p2-large.jpg"></a>
+        <div class=cycle-overlay>Muir Woods</div>
+    </div>
+    <div class=slide>
+        <img src="../images/p3-large.jpg"></a>
+        <div class=cycle-overlay>Angel Island</div>
+    </div>
+    <div class=slide>
+        <img src="../images/p4-large.jpg"></a>
+        <div class=cycle-overlay>Raquette Lake</div>
+    </div>
+</div>
+<div class="cycle-pager" id=pager3></div>
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

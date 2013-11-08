@@ -1,0 +1,217 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Caption2 Plugin</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Caption2 Plugin</h1>
+</div>
+
+<div id="main">
+
+<script src="../../jquery.cycle2.caption2.js"></script>
+<link rel=stylesheet href="../font/font-awesome.css">
+
+<style>
+.cycle-caption { top: 10px }
+.slider .cycle-caption { bottom: 10px; top: auto; font-size: 20px; font-weight: bold }
+h3 { margin-top: 30px }
+#captionArrow, #overlayArrow { position: absolute; color: red; white-space: nowrap; font-size: 20px }
+#captionArrow { top: 10px; left: 102%; }
+#overlayArrow { bottom: 15px; right: 102%; }
+</style>
+
+<div class=info>
+    <p>
+    Cycle2's <em>caption2</em> plugin must be included in order to use the effects shown
+    on this page.  See the <a href="../download/index.html">Download page</a> for a link to the caption2 plugin.
+</div>
+
+<h2>Animated Captions and Overlays</h2>
+<p>
+The caption2 plugin supplements the default caption plugin provided by Cycle2 and
+provides the capability of applying animations to a slideshow's caption and/or
+overlay.  It is enabled by declaring the plugin by name on your slideshow element. 
+<pre>
+&lt;div class="cycle-slideshow" 
+    <span class=special>data-cycle-caption-plugin="caption2"</span>
+    ...</pre>
+
+<h2>Examples</h2>
+<p>
+<h3>Defaults</h3>
+<p>
+The default options for the caption2 plugin are to fade in/out both the
+caption and overlay:
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-caption-plugin=caption2
+    >
+    &lt;div class="cycle-caption">&lt;/div>
+    &lt;div class="cycle-overlay">&lt;/div>
+
+    &lt;img src="&lt;?= $imagePath ?>/images/p1.jpg" data-cycle-title="Spring" data-cycle-desc="Sonnenberg Gardens">
+    &lt;img src="&lt;?= $imagePath ?>/images/p2.jpg" data-cycle-title="Redwoods" data-cycle-desc="Muir Woods National Monument">
+    &lt;img src="&lt;?= $imagePath ?>/images/p3.jpg" data-cycle-title="Angel Island" data-cycle-desc="San Franscisco Bay">
+    &lt;img src="&lt;?= $imagePath ?>/images/p4.jpg" data-cycle-title="Raquette Lake" data-cycle-desc="Adirondack State Park">
+&lt;/div>
+</pre>
+<div class="cycle-slideshow" 
+    data-cycle-fx=fade
+    data-cycle-caption-plugin=caption2
+    >
+    <div id=captionArrow><i class=icon-arrow-left></i> <em>caption</em></div>
+    <div id=overlayArrow><em>overlay</em> <i class=icon-arrow-right></i></div>
+    <div class="cycle-caption"></div>
+    <div class="cycle-overlay"></div>
+
+    <img src="../images/p1.jpg" data-cycle-title="Spring" data-cycle-desc="Sonnenberg Gardens">
+    <img src="../images/p2.jpg" data-cycle-title="Redwoods" data-cycle-desc="Muir Woods National Monument">
+    <img src="../images/p3.jpg" data-cycle-title="Angel Island" data-cycle-desc="San Franscisco Bay">
+    <img src="../images/p4.jpg" data-cycle-title="Raquette Lake" data-cycle-desc="Adirondack State Park">
+</div>
+
+
+<h3>Fade Overlay Content (not overlay container)</h3>
+<p>
+This example shows how to modify the above example to fade out the overlay
+<em>contents</em> rather than the entire overlay container.  This is done by
+using the <code>data-cycle-overlay-fx-sel</code> option to target the 
+elements to be animated.
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=3000
+    data-cycle-speed=700
+    data-cycle-caption-plugin=caption2
+    <span class=special>data-cycle-overlay-fx-sel=">div"</span>
+    >
+    &lt;div class="cycle-caption">&lt;/div>
+    &lt;div class="cycle-overlay">&lt;/div>
+
+    &lt;img src="&lt;?= $imagePath ?>/images/p1.jpg" data-cycle-title="Spring" data-cycle-desc="Sonnenberg Gardens">
+    &lt;img src="&lt;?= $imagePath ?>/images/p2.jpg" data-cycle-title="Redwoods" data-cycle-desc="Muir Woods National Monument">
+    &lt;img src="&lt;?= $imagePath ?>/images/p3.jpg" data-cycle-title="Angel Island" data-cycle-desc="San Franscisco Bay">
+    &lt;img src="&lt;?= $imagePath ?>/images/p4.jpg" data-cycle-title="Raquette Lake" data-cycle-desc="Adirondack State Park">
+&lt;/div>
+</pre>
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=3000
+    data-cycle-speed=700
+    data-cycle-caption-plugin=caption2
+    data-cycle-overlay-fx-sel=">div"
+    >
+    <div class="cycle-caption"></div>
+    <div class="cycle-overlay"></div>
+
+    <img src="../images/p1.jpg" data-cycle-title="Spring" data-cycle-desc="Sonnenberg Gardens">
+    <img src="../images/p2.jpg" data-cycle-title="Redwoods" data-cycle-desc="Muir Woods National Monument">
+    <img src="../images/p3.jpg" data-cycle-title="Angel Island" data-cycle-desc="San Franscisco Bay">
+    <img src="../images/p4.jpg" data-cycle-title="Raquette Lake" data-cycle-desc="Adirondack State Park">
+</div>
+
+<h3>Slide Up/Down Caption</h3>
+<pre>
+&lt;div class="cycle-slideshow slider" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=3000
+    data-cycle-caption-plugin=caption2
+    <span class=special>data-cycle-caption-fx-out='slideUp'</span>
+    <span class=special>data-cycle-caption-fx-in='slideDown'</span>
+    >
+    &lt;div class="cycle-caption">&lt;/div>
+
+    &lt;img src="&lt;?= $imagePath ?>/images/p1.jpg" data-cycle-title="Spring" data-cycle-desc="Sonnenberg Gardens">
+    &lt;img src="&lt;?= $imagePath ?>/images/p2.jpg" data-cycle-title="Redwoods" data-cycle-desc="Muir Woods National Monument">
+    &lt;img src="&lt;?= $imagePath ?>/images/p3.jpg" data-cycle-title="Angel Island" data-cycle-desc="San Franscisco Bay">
+    &lt;img src="&lt;?= $imagePath ?>/images/p4.jpg" data-cycle-title="Raquette Lake" data-cycle-desc="Adirondack State Park">
+&lt;/div>
+</pre>
+<div class="cycle-slideshow slider" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=3000
+    data-cycle-caption-plugin=caption2
+    data-cycle-caption-fx-out="slideUp"
+    data-cycle-caption-fx-in="slideDown"
+    >
+    <div class="cycle-caption"></div>
+
+    <img src="../images/p1.jpg" data-cycle-title="Spring" data-cycle-desc="Sonnenberg Gardens">
+    <img src="../images/p2.jpg" data-cycle-title="Redwoods" data-cycle-desc="Muir Woods National Monument">
+    <img src="../images/p3.jpg" data-cycle-title="Angel Island" data-cycle-desc="San Franscisco Bay">
+    <img src="../images/p4.jpg" data-cycle-title="Raquette Lake" data-cycle-desc="Adirondack State Park">
+</div>
+
+<h3>Slide Up/Down Overlay</h3>
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=3000
+    data-cycle-caption-plugin=caption2
+    <span class=special>data-cycle-overlay-fx-out="slideUp"</span>
+    <span class=special>data-cycle-overlay-fx-in="slideDown"</span>
+    >
+    &lt;div class="cycle-overlay">&lt;/div>
+
+    &lt;img src="&lt;?= $imagePath ?>/images/p1.jpg" data-cycle-title="Spring" data-cycle-desc="Sonnenberg Gardens">
+    &lt;img src="&lt;?= $imagePath ?>/images/p2.jpg" data-cycle-title="Redwoods" data-cycle-desc="Muir Woods National Monument">
+    &lt;img src="&lt;?= $imagePath ?>/images/p3.jpg" data-cycle-title="Angel Island" data-cycle-desc="San Franscisco Bay">
+    &lt;img src="&lt;?= $imagePath ?>/images/p4.jpg" data-cycle-title="Raquette Lake" data-cycle-desc="Adirondack State Park">
+&lt;/div>
+</pre>
+<div class="cycle-slideshow" 
+    data-cycle-fx=scrollHorz
+    data-cycle-timeout=3000
+    data-cycle-caption-plugin=caption2
+    data-cycle-overlay-fx-out="slideUp"
+    data-cycle-overlay-fx-in="slideDown"
+    >
+    <div class="cycle-overlay"></div>
+
+    <img src="../images/p1.jpg" data-cycle-title="Spring" data-cycle-desc="Sonnenberg Gardens">
+    <img src="../images/p2.jpg" data-cycle-title="Redwoods" data-cycle-desc="Muir Woods National Monument">
+    <img src="../images/p3.jpg" data-cycle-title="Angel Island" data-cycle-desc="San Franscisco Bay">
+    <img src="../images/p4.jpg" data-cycle-title="Raquette Lake" data-cycle-desc="Adirondack State Park">
+</div>
+
+
+<h2 id="options">Caption2 Options</h2>
+<p>
+Options are set on the slideshow element using <code>data-cycle-<em><strong>option-name</strong></em></code> attributes. 
+Option attribute names are always lowercase and prefixed with <code>data-cycle-</code>.  For example,
+to set the <em>caption-plugin</em> option you would use the
+<code>data-cycle-caption-plugin</code> attribute.
+
+<table>
+<thead><tr><th>Name<th>Default Value<th>Description</thead>
+<tr><th>caption-plugin<td>undefined<td>This <strong>must</strong> be set to <code>"caption2"</code> to enable this plugin.
+<tr><th>caption-fx-out<td>"fadeOut"<td>animation <em>out</em> effect for caption
+<tr><th>caption-fx-in<td>"fadeIn"<td>animation <em>in</em> effect for caption
+<tr><th>caption-fx-sel<td>undefined<td>selector to identify the elements <em>within</em> the caption
+        that should be animated.  Leave <code>undefined</code> to animate the entire caption element.
+<tr><th>overlay-fx-out<td>"fadeOut"<td>animation <em>out</em> effect for overlay
+<tr><th>overlay-fx-in<td>"fadeIn"<td>animation <em>in</em> effect for overlay
+<tr><th>overlay-fx-sel<td>undefined<td>selector to identify the elements <em>within</em> the overlay
+        that should be animated.  Leave <code>undefined</code> to animate the entire overlay element.
+
+</table>
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

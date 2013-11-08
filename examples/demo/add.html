@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Adding Slides</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Adding Slides</h1>
+</div>
+
+<div id="main">
+
+<p>
+Adding arbitrary slides after the slideshow has been initialized is performed 
+programmatically by issuing the <code>add</code> command
+to the slideshow.
+
+<p>
+The slideshow below starts off with just a single image.  Three more are added when
+the button is clicked.
+
+<pre>
+&lt;!-- slideshow with one image -->
+&lt;div class="cycle-slideshow" 
+        data-cycle-fx="scrollHorz" 
+        data-cycle-timeout="2000"
+    >
+    &lt;div class="cycle-caption">&lt;/div>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+&lt;/div>
+
+&lt;div class=center>
+    &lt;button>Add More Images&lt;/button>
+&lt;/div>
+
+&lt;!-- script to add more images at a later time -->
+&lt;script>
+var images = [
+    '&lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">',
+    '&lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">',
+    '&lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">'
+];
+
+$('button').one('click', function() {
+    for (var i=0; i &lt; images.length; i++) {
+        <span class=special>$('.cycle-slideshow').cycle('add', images[i]);</span>
+    }
+    $(this).prop('disabled', true)
+})
+&lt;/script>
+</pre>
+
+
+<!-- slideshow with one image -->
+<div class="cycle-slideshow" 
+        data-cycle-fx="scrollHorz" 
+        data-cycle-timeout="2000"
+    >
+    <div class="cycle-caption"></div>
+    <img src="../images/p1.jpg">
+</div>
+
+<div class=center>
+    <button>Add More Images</button>
+</div>
+
+
+<!-- script to add more images at a later time -->
+<script>
+var images = [
+    '<img src="http://jquery.malsup.com/cycle2/images/p2.jpg">',
+    '<img src="../images/p3.jpg">',
+    '<img src="../images/p4.jpg">'
+];
+
+$('button').one('click', function() {
+    for (var i=0; i < images.length; i++) {
+        $('.cycle-slideshow').cycle('add', images[i]);
+    }
+    $(this).prop('disabled', true)
+})
+</script>
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

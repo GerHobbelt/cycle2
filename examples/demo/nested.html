@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Nested Slideshow</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Nested Slideshow</h1>
+</div>
+
+<div id="main">
+
+<style>
+#slideshow, #slideshow > div { width: 220px; height: 220px }
+#output { margin-top: 30px; color: blue }
+</style>
+
+<script src="../../jquery.cycle2.tile.js"></script>
+<script src="../../jquery.cycle2.scrollVert.js"></script>
+
+<p>
+This page consists of one outer slideshow with three slides.  Each of the slides contains
+a slideshow with 3 images.  As each inner slideshow completes, the outer slideshow advances
+to the next slide, and that slide's slideshow begins.  Each transition happens on a 3 second
+timeout.
+
+<div class="cycle-slideshow" id="slideshow"
+    data-cycle-fx="scrollVert"
+    data-cycle-slides="> div" 
+    data-cycle-timeout=0 
+    data-cycle-speed=250
+    data-cycle-prev="#prev"
+    data-cycle-next="#next"
+    >
+    <div>
+        <div class="cycle-slideshow inner-slideshow"
+            data-cycle-fx="tileSlide"
+            data-cycle-timeout=3000
+            data-cycle-loop=1
+            >
+            <img src="../images/beach1.jpg" width="200" height="200">
+            <img src="../images/beach2.jpg" width="200" height="200">
+            <img src="../images/beach3.jpg" width="200" height="200">
+        </div>
+    </div>
+
+    <div>
+        <div class="cycle-slideshow inner-slideshow"
+            data-cycle-fx="scrollHorz"
+            data-cycle-timeout=0
+            data-cycle-loop=1
+            >
+            <img src="../images/beach4.jpg" width="200" height="200">
+            <img src="../images/beach5.jpg" width="200" height="200">
+            <img src="../images/beach6.jpg" width="200" height="200">
+        </div>
+    </div>
+
+    <div>
+        <div class="cycle-slideshow inner-slideshow"
+            data-cycle-fx="fadeOut"
+            data-cycle-timeout=0
+            data-cycle-loop=1
+            >
+            <img src="../images/beach7.jpg" width="200" height="200">
+            <img src="../images/beach8.jpg" width="200" height="200">
+            <img src="../images/beach9.jpg" width="200" height="200">
+        </div>
+    </div>
+</div>
+<!-- prev/next links -->
+<div class=center>
+    <span id="prev">&lt;&lt;Prev </span>
+    <span id="next"> Next&gt;&gt;</span>
+</div>
+
+<div id="output"></div>
+
+<script>
+var outer = $('#slideshow');
+var inners = $('.inner-slideshow');
+var output = $('#output');
+
+inners.on( 'cycle-finished', function( e, opts, curr, next ) {
+    setTimeout(function() {
+        outer.cycle( 'next' );
+    }, 3000);
+});
+
+$('#slideshow').on( 'cycle-before', function( e, opts, curr, next ) {
+    // ignore bubbled events from inner slideshows
+    if (e.target !== this)
+        return;
+
+    inners.cycle('stop');
+
+    var index = opts.slides.index( next );
+    output.html( 'starting slideshow #' + (index+1) );
+
+    // start the next slideshow
+    $( next ).find('.inner-slideshow').cycle('destroy').cycle({
+        timeout: 3000
+    });
+});
+
+</script>
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

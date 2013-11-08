@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Continuous</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Continuous</h1>
+</div>
+
+<div id="main">
+
+<p>
+While the use of continuous slideshows is strongly discouraged due to their
+impact on CPU usage, they are possible with Cycle2 by setting the 
+easing and timeout options as shown below.
+
+<pre>
+&lt;div class="cycle-slideshow cycle-autoinit" 
+    data-cycle-fx="scrollHorz"
+    data-cycle-speed="3000"
+    <span class=special>data-cycle-timeout="1"</span>
+    <span class=special>data-cycle-easing="linear"</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+</pre>
+
+<div class="cycle-slideshow cycle-autoinit" 
+    data-cycle-fx=scrollHorz
+    data-cycle-speed=3000
+    data-cycle-timeout=1
+    data-cycle-easing=linear
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

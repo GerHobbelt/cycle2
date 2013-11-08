@@ -1,0 +1,367 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Carousel</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Carousel</h1>
+</div>
+
+<div id="main">
+
+<script src="../../jquery.cycle2.carousel.js"></script>
+<script>$.fn.cycle.defaults.autoSelector = '.slideshow';</script>
+
+<style>
+.slideshow { margin: auto }
+.slideshow img { width: 100px; height: 100px; padding: 2px; }
+div.responsive img { width: auto; height: auto }
+.cycle-pager { position: static; margin-top: 5px }
+div.vertical { width: 100px }
+</style>
+
+<div class=info>
+    <p>
+    Cycle2's <em>carousel</em> transition plugin must be included in order to use the carousel effect.  See the
+    <a href="../download/index.html">Download page</a> for a link to the carousel plugin.
+</div>
+
+<h2 id="simple">Simple</h2>
+<p>
+Carousels can be horizontal or vertical, automatic or manual, circular or non-circular, and
+fluid or fixed-width.  There are 
+several options with which you can customize a carousel slideshow.  By default, a carousel
+slideshow is circular which means that slides can wrap, effectively creating
+an endless carousel (as seen below).  Also by default, a carousel will display as many
+slides as can fit in the slideshow container.
+<pre>
+&lt;div class="slideshow" 
+    <span class=special>data-cycle-fx=carousel</span>
+    data-cycle-timeout=1000
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach2.jpg">
+    ...
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach9.jpg">
+&lt;/div>
+</pre>
+
+<div class="slideshow" 
+    data-cycle-fx=carousel
+    data-cycle-timeout=1000
+    >
+    <img src="../images/beach1.jpg">
+    <img src="../images/beach2.jpg">
+    <img src="../images/beach3.jpg">
+    <img src="../images/beach4.jpg">
+    <img src="../images/beach5.jpg">
+    <img src="../images/beach6.jpg">
+    <img src="../images/beach7.jpg">
+    <img src="../images/beach8.jpg">
+    <img src="../images/beach9.jpg">
+</div>
+
+
+
+
+<h2 id="visible">Visible Slides</h2>
+<p>
+Use the <code>data-cycle-carousel-visible</code> attribute to limit the number of visible slides.
+When this option is used, the width of the carousel becomes fixed.
+
+<pre>
+&lt;div class="slideshow" 
+    data-cycle-fx=carousel
+    data-cycle-timeout=1000
+    <span class=special>data-cycle-carousel-visible=5</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach2.jpg">
+    ...
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach9.jpg">
+&lt;/div>
+</pre>
+
+<div class="slideshow" 
+    data-cycle-fx=carousel
+    data-cycle-timeout=1000
+    data-cycle-carousel-visible=5
+    >
+    <img src="../images/beach1.jpg">
+    <img src="../images/beach2.jpg">
+    <img src="../images/beach3.jpg">
+    <img src="../images/beach4.jpg">
+    <img src="../images/beach5.jpg">
+    <img src="../images/beach6.jpg">
+    <img src="../images/beach7.jpg">
+    <img src="../images/beach8.jpg">
+    <img src="../images/beach9.jpg">
+</div>
+
+
+
+
+<h2 id="responsive">Responsive</h2>
+<p>
+When you use the <code>data-cycle-carousel-visible</code> attribute, you may also use the
+<code>data-cycle-carousel-fluid</code> attribute in order to achieve a responsive carousel slider,
+instead of a fixed-width carousel.  
+When the value of <code>data-cycle-carousel-fluid</code> is set to
+<code>true</code> your carousel slides will be fluid-width within the container.  So
+if your container is fluid-width the slides will be resized with the container so that the
+value of <code>data-cycle-carousel-visible</code> is honored.
+
+<pre>
+&lt;div class="slideshow" 
+    data-cycle-fx=carousel
+    data-cycle-timeout=1000
+    <span class=special>data-cycle-carousel-visible=5</span>
+    <span class=special>data-cycle-carousel-fluid=true</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach2.jpg">
+    ...
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach9.jpg">
+&lt;/div>
+</pre>
+
+<div class=info>
+    <p>
+    It's important that your slides do not have a declared width or height for this to work
+    properly.  The slideshow below has the following style rule applied:<br>
+    <code>div.responsive img { width: auto; height: auto }</code>
+</div>
+
+<div class="slideshow responsive" 
+    data-cycle-fx=carousel
+    data-cycle-timeout=1000
+    data-cycle-carousel-visible=5
+    data-cycle-carousel-fluid=true
+    >
+    <img src="../images/beach1.jpg">
+    <img src="../images/beach2.jpg">
+    <img src="../images/beach3.jpg">
+    <img src="../images/beach4.jpg">
+    <img src="../images/beach5.jpg">
+    <img src="../images/beach6.jpg">
+    <img src="../images/beach7.jpg">
+    <img src="../images/beach8.jpg">
+    <img src="../images/beach9.jpg">
+</div>
+
+
+
+<h2 id="controls">Controls</h2>
+<p>
+As with any Cycle2 slideshow, prev/next and pager controls can be used to
+advance the current slide.
+
+<pre>
+&lt;div class="slideshow" 
+    data-cycle-fx=carousel
+    data-cycle-timeout=0
+    data-cycle-carousel-visible=5
+    <span class=special>data-cycle-next="#next"</span>
+    <span class=special>data-cycle-prev="#prev"</span>
+    <span class=special>data-cycle-pager="#pager"</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach2.jpg">
+    ...
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach9.jpg">
+&lt;/div>
+
+&lt;div class=center>
+    &lt;a href=# id=prev>&amp;lt;&amp;lt; Prev &lt;/a>
+    &lt;a href=# id=next> Next &amp;gt;&amp;gt; &lt;/a>
+&lt;/div>
+
+&lt;div class="cycle-pager" id=pager>&lt;/div>
+</pre>
+
+<div class="slideshow" 
+    data-cycle-fx=carousel
+    data-cycle-timeout=0
+    data-cycle-carousel-visible=5
+    data-cycle-next="#next"
+    data-cycle-prev="#prev"
+    data-cycle-pager="#pager"
+    >
+    <img src="../images/beach1.jpg">
+    <img src="../images/beach2.jpg">
+    <img src="../images/beach3.jpg">
+    <img src="../images/beach4.jpg">
+    <img src="../images/beach5.jpg">
+    <img src="../images/beach6.jpg">
+    <img src="../images/beach7.jpg">
+    <img src="../images/beach8.jpg">
+    <img src="../images/beach9.jpg">
+</div>
+
+<div class=center>
+    <a href=# id=prev>&lt;&lt; Prev </a>
+    <a href=# id=next> Next &gt;&gt; </a>
+</div>
+
+<div class="cycle-pager" id=pager></div>
+
+
+
+<h2 id="vertical">Vertical</h2>
+<p>
+For a vertical carousel, set the <code>data-cycle-carousel-vertical</code> attribute to true.
+
+<pre>
+&lt;div class="slideshow vertical" 
+    data-cycle-fx=carousel
+    data-cycle-timeout=0
+    data-cycle-next="#next3"
+    data-cycle-prev="#prev3"
+    data-cycle-pager="#pager3"
+    data-cycle-carousel-visible=2
+    <span class=special>data-cycle-carousel-vertical=true</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach2.jpg">
+    ...
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach9.jpg">
+&lt;/div>
+
+&lt;div class=center>
+    &lt;a href=# id=prev3>&lt;&lt; Prev &lt;/a>
+    &lt;a href=# id=next3> Next &gt;&gt; &lt;/a>
+&lt;/div>
+
+&lt;div class="cycle-pager" id=pager3>&lt;/div>
+</pre>
+
+<div class="slideshow vertical" 
+    data-cycle-fx=carousel
+    data-cycle-timeout=0
+    data-cycle-next="#next3"
+    data-cycle-prev="#prev3"
+    data-cycle-pager="#pager3"
+    data-cycle-carousel-visible=2
+    data-cycle-carousel-vertical=true
+    >
+    <img src="../images/beach1.jpg">
+    <img src="../images/beach2.jpg">
+    <img src="../images/beach3.jpg">
+    <img src="../images/beach4.jpg">
+    <img src="../images/beach5.jpg">
+    <img src="../images/beach6.jpg">
+    <img src="../images/beach7.jpg">
+    <img src="../images/beach8.jpg">
+    <img src="../images/beach9.jpg">
+</div>
+<div class=center>
+    <a href=# id=prev3>&lt;&lt; Prev </a>
+    <a href=# id=next3> Next &gt;&gt; </a>
+</div>
+
+<div class="cycle-pager" id=pager3></div>
+
+
+
+
+<h2 id="non-circular">Non-Circular</h2>
+<p>
+Carousels can be non-circular by setting the <code>data-allow-wrap</code>
+attribute to false.  A non-circular slideshow will not advance past the last slide.
+
+<pre>
+&lt;div class="slideshow" 
+    data-cycle-fx=carousel
+    data-cycle-timeout=0
+    data-cycle-next="#next4"
+    data-cycle-prev="#prev4"
+    data-cycle-pager="#pager4"
+    data-cycle-carousel-visible=5
+    <span class=special>data-allow-wrap=false</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach2.jpg">
+    ...
+    &lt;img src="http://jquery.malsup.com/cycle2/images/beach9.jpg">
+&lt;/div>
+
+&lt;div class=center>
+    &lt;a href=# id=prev4>&lt;&lt; Prev &lt;/a>
+    &lt;a href=# id=next4> Next &gt;&gt; &lt;/a>
+&lt;/div>
+
+&lt;div class="cycle-pager" id=pager4>&lt;/div>
+</pre>
+
+<div class="slideshow" 
+    data-cycle-fx=carousel
+    data-cycle-timeout=0
+    data-cycle-next="#next4"
+    data-cycle-prev="#prev4"
+    data-cycle-pager="#pager4"
+    data-cycle-carousel-visible=5
+    data-cycle-allow-wrap=false
+    >
+    <img src="../images/beach1.jpg">
+    <img src="../images/beach2.jpg">
+    <img src="../images/beach3.jpg">
+    <img src="../images/beach4.jpg">
+    <img src="../images/beach5.jpg">
+    <img src="../images/beach6.jpg">
+    <img src="../images/beach7.jpg">
+    <img src="../images/beach8.jpg">
+    <img src="../images/beach9.jpg">
+</div>
+<div class=center>
+    <a href=# id=prev4>&lt;&lt; Prev </a>
+    <a href=# id=next4> Next &gt;&gt; </a>
+</div>
+
+<div class="cycle-pager" id="pager4"></div>
+
+
+
+<h2 id="options">Carousel Options</h2>
+<p>
+Options are set on the slideshow element using <code>data-cycle-<em><strong>option-name</strong></em></code> attributes. 
+Option attribute names are always lowercase and prefixed with <code>data-cycle-</code>.  For example,
+to set the <em>carousel-visible</em> option you would use the
+<code>data-cycle-carousel-visible</code> attribute.
+
+<table>
+<thead><tr><th>Name<th>Default Value<th>Description</thead>
+<tr><th>carousel-fluid<td>false<td>If this value is <code>true</code> <strong>and</strong>
+    <code>data-cycle-carousel-visible</code> is set, then the slides within the carousel
+    will be resized in order to fill the container with the number of slides specified by
+    the <code>data-cycle-carousel-visible</code> attribute.
+<tr><th>carousel-offset<td>0<td>The number of pixels to offset the carousel.
+<tr><th>carousel-slide-dimension<td>undefined<td>The width (horz carousel) or height (vert carousel) 
+    of each slide.  If this option is not set the value will be inferred from
+    the first slide's dimensions.
+<tr><th>carousel-vertical<td>false<td><code>true</code> for a vertical carousel.
+<tr><th>carousel-visible<td>undefined<td>Number of slides to be displayed in the carousel.  Setting this
+    option will cause the carousel to have a fixed width unless <code>data-cycle-carousel-fluid</code>
+    is set to <code>true</code>.
+<tr><th>throttle-speed<td>undefined<td><code>true</code> if the speed should be throttled
+    to achieve a consistent scroll rate.  This is useful only if you wish each slide
+    to be scrolled at the exact same rate and your slides have different widths.
+
+</table>
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

@@ -1,0 +1,278 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Advanced API</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="../demo/demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Advanced API</h1>
+</div>
+
+<div id="main">
+<style>
+.links a { padding: 10px }
+</style>
+
+<div class="center links">
+    <p>
+    <a href="#methods" class=unit>Methods</a>
+    <a href="#transition" class=unit>Transitions</a>
+</div>
+
+<p>
+The Cycle2 plugin has a rich set of functions which it invokes in order to initialize
+and run a slideshow.  This API is fully customizable so that you can both replace
+existing implementation bits and also create new transition effects.
+
+<h2 id="methods">Methods</h2>
+    <p>All API methods can be replaced with custom implementations by binding to the
+    <a href="index.html#bootstrap">cycle-bootstrap</a> event and replacing the 
+    appropriate property on the API object.  Example:
+    <pre>$( '#mySlideshow' ).on( 'cycle-bootstrap', function( e, optionHash, API ) {
+    // replace "advanceSlide" method with custom impl
+    API.advanceSlide = function( numberOfPositions ) {
+        // custom implementation
+    }
+});</pre>
+    <p>
+    It is also possible to retrieve the API object at any time by using the <em>data</em>
+    method on the slideshow container.
+    <pre>var API = $( '#mySlideshow' ).data( 'cycle.API' );</pre>
+
+    <table>
+    <thead><tr><th>Name<th>Description / Signature</thead>
+    <tr><th>add<td>This method adds slides to the slideshow.
+            It is invoked during initialization of the slideshow and whenever the
+            <code>add</code> command is issued to an already running slideshow.<br>
+            <pre>function( slides )</pre>
+            <em>slides</em> can be a string, an array, or a jQuery object
+
+    <tr><th>addInitialSlides<td>This method handles finding and adding the initial slideset.
+            <pre>function()</pre>
+
+    <tr><th>advanceSlide<td>Sets the nextSlide property of the optionHash
+            and stages the next transition.
+            <pre>function( numberOfPositions )</pre>
+            <em>numberOfPositions</em> can be negative to move backward in the slidehow, or
+            positive to move forward. 
+
+    <tr><th>buildPagerLink<td>Creates a pager link for each slide and binds
+            the <em>pagerEvent</em> to the slide.
+            <pre>function( slideOptionHash, slide )</pre>
+
+    <tr><th>buildSlideOpts<td>Builds an option hash for an individual slide
+            inheriting from the slideshow options for properties not defined
+            on the slide.
+            <pre>function( slide )</pre>
+
+    <tr><th>calcFirstSlide<td>Sets properties for the initial slideshow
+            state, including the first slide to be displayed as well as the <em>nextSlide</em>.
+            <pre>function()</pre>
+
+    <tr><th>calcNextSlide<td>Sets properties for currSlide and nextSlide
+            after a transition is started.
+            <pre>function()</pre>
+
+    <tr><th>calcTx<td>determines the name of the transition based on the <em>fx</em> and
+            <em>manualFx</em> properties and the value of the <em>manual</em> flag.
+            <pre>function( slideOptions, manual )</pre>
+
+    <tr><th>destroy<td>Reverts a slideshow to its original state by removing elements
+            and event bindings added by Cycle2.  This method is invoked when the
+            <code>destroy</code> command is issued programmatically to the slideshow.
+            <pre>function()</pre>
+
+    <tr><th>doTransition<td>Begins a transition from one slide to another
+            <pre>function( slideOptions, currEl, nextEl, fwdFlag, callback )</pre>
+            <ul>
+            <li><em>currEl</em>: the slide element that is currently showing
+            <li><em>nextEl</em>: the slide element that is to be displayed next
+            <li><em>fwdFlag</em>: flag indicating it the transition should move forward or backward
+            <li><em>callback</em>: function to invoke after the transition completes
+            </ul>
+
+    <tr><th>getComponent<td>Returns the component(s) for the requested name.  This is used
+            internally to find the <em>pager</em>, <em>caption</em>, and <em>overlay</em>
+            elements.
+            <pre>function( nameOfComponent )</pre>
+
+    <tr><th>getSlideIndex<td>Returns the zero-based slide index of the element passed.
+            <pre>function( slideElement )</pre>
+
+    <tr><th>getSlideOpts<td>Returns the optionHash for a specific slide.
+            <pre>function( slideIndex )</pre>
+
+    <tr><th>goto<td>Advances the slideshow to a specific slide index (zero-based).
+            <pre>function( index )</pre>
+            This function is invoked whent the <code>goto</code> command is issued
+            to the slideshow.
+
+    <tr><th>initSlide<td>Invoked as each slide is added to the slideshow to set
+            initial styles.
+            <pre>function( slideOptions, slide, suggestedZindex )</pre>
+
+    <tr><th>initSlideshow<td>Handled one-time initialization logic for the slideshow.
+            <pre>function()</pre>
+
+    <tr><th>log<td>Logs a slideshow message.  Used internally to log important
+            information to the javascript console.
+            <pre>function( arg1, arg2, arg3, ... )</pre>
+            Arguments are concatenated into a space-delimited string.
+
+    <tr><th>next<td>Advances the slideshow to the next slide.
+            <pre>function()</pre>
+            Invoked by <em>next</em> controls and when the
+            <code>next</code> command is issued programmatically.
+
+    <tr><th>page<td>Advances the slideshow to a specific index based on
+            the target element of the pagerEvent.
+            <pre>function( pagerEl, targetEl )</pre>
+
+    <tr><th>pause<td>Pauses a slideshow.
+            <pre>function()</pre>
+            Invoked when the <code>pause</code> command is issued to the 
+            slideshow.
+
+    <tr><th>postInitSlideshow<td>Invoked after the main initialization logic has
+            been run.
+            <pre>function()</pre>
+
+    <tr><th>preInitSlideshow<td>Invoked before main initialization logic runs
+            but after initial slides have been added to the slideshow.
+            <pre>function()</pre>
+
+    <tr><th>prepareTx<td>Prepares the next transition.
+            <pre>function( manualFlag, fwdFlag )</pre>
+
+    <tr><th>prev<td>Advances the slideshow to the previous slide.
+            Invoked by <em>prev</em> controls and when the
+            <code>prev</code> command is issued programmatically.
+            <pre>function()</pre>
+
+    <tr><th>queueTransition<td>Stages the next transition preparation.
+            <pre>function( slideOptions )</pre>
+
+    <tr><th>reinit<td>Reinitializes the slideshow.
+            <pre>function()</pre>
+            This function is invoked when the <code>reinit</code> command is 
+            issued to the slideshow.
+
+    <tr><th>remove<td>Removes a slide from the slideshow.
+            <pre>function( slideIndexToRemove )</pre>
+
+    <tr><th>resume<td>Resumes a paused slideshow.
+            <pre>function()</pre>
+            This function is invoked when the <code>resume</code> command is 
+            issued to the slideshow.
+
+    <tr><th>stackSlides<td>Rezindexes the slide deck in preparation for the next transition.
+            <pre>function( currEl, nextEl, fwdFlag )</pre>
+
+    <tr><th>stop<td>Terminates a running slideshow.
+            <pre>function()</pre>
+            This function is invoked when the <code>stop</code> command is 
+            issued to the slideshow.
+
+    <tr><th>stopTransition<td>Stops any transitions currently in progress.
+            <pre>function()</pre>
+
+    <tr><th>tmpl<td>Performs token replacement on a template string.
+            <pre>function( templateString, optionHash, slideEl )</pre>
+
+    <tr><th>trigger<td>Triggers an event on the slideshow container.
+            <pre>function( eventName, args )</pre>
+
+    <tr><th>updateView<td>Updates visible data for the slideshow.  Sets the active
+            class on the appropriate slide element and triggers the <code>cycle-update-view</code>
+            event.
+            <pre>function()</pre>
+    </table>
+
+
+
+
+<h2 id="transition">Transitions API</h2>
+
+    <p>Custom transitions are created by extending Cycle2's <code>transitions</code> object
+        with an object that implements some or all of the transition API.  For example:
+    <pre>$.fn.cycle.transitions.myNewTransition = {
+    before: function( opts, curr, next, fwd ) {
+        // assign properties to the <em>opts</em> object
+    }
+}</pre>
+    <p>
+    A transition's <code>before</code> function is invoked prior to starting a transition from
+    one slide to the next. Typically defining the <code>before</code> function is adequate 
+    for defining a new transition effect, however you may also define any of the other functions
+    described below.
+    <p>
+    Once a new transition is defined, it can be used by assigning it's name to Cycle2's 
+    <code>fx</code> option.
+    <pre>$('.cycle-slideshow').cycle({
+    fx: 'myNewTransition'
+});</pre>
+    <p>
+    The following table describes Cycle2's transition API:
+
+    <table class="config">
+    <thead><tr><th>Name<th>Description/Signature</thead>
+    <tr><th>after<td>Invoked after the transion has completed.
+            <pre>function( slideOptions, currEl, nextEl, fwdFlag )</pre>
+
+    <tr><th>before<td>Invoked immediately before a transition is started.
+            <pre>function( slideOptions, currEl, nextEl, fwdFlag )</pre>
+
+    <tr><th>postInit<td>Invoked once immeidately after the slideshow is initialized
+            <pre>function( optionHash )</pre>
+
+    <tr><th>preInit<td>Invoked once immediately before the slideshow is initialized
+            <pre>function( optionHash )</pre>
+    
+    <tr><th>stopTransition<td>Invoked when a transition should be stopped immediately.
+            <pre>function( optionHash )</pre>
+
+    <tr><th>transition<td>Invoked in order to perform the transition.  This allows
+            Cycle2's core transition logic to be completely overridden.
+            <pre>function( slideOptions, currEl, nextEl, fwdFlag, callback )</pre>
+            The <em>callback</em> function <strong>MUST</strong> be invoked by the
+            transition function.
+
+    </table>
+    
+    <p>
+    Useful properties to set on the optionHash in the <code>before</code> method:
+    <table class="config">
+    <thead><tr><th>Name<th>Type<th>Description</thead>
+    <tr><th>animIn<td>object hash<td>
+            An object which defines css properties that should be applied to the slide as it
+            is being animated in.
+
+    <tr><th>animOut<td>object hash<td>
+            An object which defines css properties that should be applied to the slide as it
+            is being animated out.
+
+    <tr><th>cssAfter<td>object hash<td>
+            An object which defines css properties that should be applied to the slide
+            immediately after it has animated out.
+
+    <tr><th>cssBefore<td>object hash<td>
+            An object which defines css properties that should be applied to the slide
+            immediately before it is animated in.
+    </table>
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

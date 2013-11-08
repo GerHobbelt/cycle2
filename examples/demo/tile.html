@@ -1,0 +1,248 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Tile</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Tile</h1>
+</div>
+
+<div id="main">
+
+<script src="../../jquery.cycle2.tile.js"></script>
+
+<style>
+.cycle-slideshow img { margin: 0; padding: 0 }
+span.title { padding: 0 20px; font-size: 16px }
+</style>
+
+<div class=info>
+    <p>
+    Cycle2's <em>tile</em> transition plugin must be included in order to use the tile effects.  See the
+    <a href="../download/index.html">Download page</a> for a link to the tile plugin.
+</div>
+<p>
+There are two separate tile transitions included in the tile plugin.  They are
+<code>tileSlide</code> and <code>tileBlind</code> and they can be applied
+vertically or horizontally.
+
+
+
+<h2 id="simple">Simple</h2>
+<p>
+By default, a tile transition is vertical and uses 7 tiles.
+<pre>
+&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js">&lt;/script>
+&lt;script src="http://jquery.malsup.com/cycle2/jquery.cycle2.js">&lt;/script>
+<span class=special>&lt;script src="http://jquery.malsup.com/cycle2/jquery.cycle2.tile.js">&lt;/script></span>
+...
+
+&lt;!-- tileSlide -->
+&lt;div class="cycle-slideshow" 
+    data-cycle-timeout=0
+    data-cycle-next="#next1"
+    data-cycle-prev="#prev1"
+    <span class=special>data-cycle-fx="tileSlide"</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+
+&lt;!-- tileBlind -->
+&lt;div class="cycle-slideshow" 
+    data-cycle-timeout=0
+    data-cycle-next="#next2"
+    data-cycle-prev="#prev2"
+    <span class=special>data-cycle-fx="tileBlind"</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+</pre>
+
+<div class="cycle-slideshow" 
+    data-cycle-timeout=0
+    data-cycle-next="#next1"
+    data-cycle-prev="#prev1"
+    data-cycle-fx="tileSlide"
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+<div class=center>
+    <a href=# id=prev1>&lt;&lt; Prev </a>
+    <span class=title>tileSlide</span>
+    <a href=# id=next1> Next &gt;&gt; </a>
+</div>
+
+<div class="cycle-slideshow" style="margin-top:40px" 
+    data-cycle-timeout=0
+    data-cycle-next="#next2"
+    data-cycle-prev="#prev2"
+    data-cycle-fx="tileBlind"
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+<div class=center>
+    <a href=# id=prev2>&lt;&lt; Prev </a>
+    <span class=title>tileBlind</span>
+    <a href=# id=next2> Next &gt;&gt; </a>
+</div>
+
+
+
+<h2 id="horz">Horizontal</h2>
+<p>
+Set the <code>data-cycle-tile-vertical</code> attribute to false for horizontal tiling.
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-timeout=0
+    data-cycle-next="#next3"
+    data-cycle-prev="#prev3"
+    data-cycle-fx="tileBlind"
+    <span class=special>data-cycle-tile-vertical=false</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+</pre>
+
+<div class="cycle-slideshow" 
+    data-cycle-timeout=0
+    data-cycle-next="#next3"
+    data-cycle-prev="#prev3"
+    data-cycle-fx="tileBlind"
+    data-cycle-tile-vertical=false
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+<div class=center>
+    <a href=# id=prev3>&lt;&lt; Prev </a>
+    <a href=# id=next3> Next &gt;&gt; </a>
+</div>
+
+
+
+<h2 id="count">Tile Count</h2>
+<p>
+Use the <code>data-cycle-tile-count</code> attribute to set the number of tiles.
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-timeout=0
+    data-cycle-next="#next4"
+    data-cycle-prev="#prev4"
+    data-cycle-fx=tileSlide
+    data-cycle-tile-vertical=false
+    <span class=special>data-cycle-tile-count=15</span>
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+</pre>
+
+<div class="cycle-slideshow" 
+    data-cycle-timeout=0
+    data-cycle-next="#next4"
+    data-cycle-prev="#prev4"
+    data-cycle-fx=tileSlide
+    data-cycle-tile-vertical=false
+    data-cycle-tile-count=12
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+<div class=center>
+    <a href=# id=prev4>&lt;&lt; Prev </a>
+    <a href=# id=next4> Next &gt;&gt; </a>
+</div>
+
+
+
+
+<h2 id="per-slide">Per-Slide Tile Effects</h2>
+<p>
+The tile transition plugin supports per-slide effects, so you can specify the desired
+transition and options using <code>data-cycle-*</code> attributes on the slides themselves instead of on
+the slideshow container.
+<pre>
+&lt;div class="cycle-slideshow" 
+    data-cycle-timeout=0
+    data-cycle-next="#next5"
+    data-cycle-prev="#prev5"
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg" <span class=special>data-cycle-fx=tileSlide</span> <span class=special>data-cycle-tile-vertical=false</span>>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg" <span class=special>data-cycle-fx=tileBlind</span> <span class=special>data-cycle-tile-count=12</span>>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg" <span class=special>data-cycle-fx=tileSlide</span> <span class=special>data-cycle-tile-count=4</span>>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg" <span class=special>data-cycle-fx=tileBlind</span> <span class=special>data-cycle-tile-vertical=false</span>>
+&lt;/div>
+</pre>
+
+<div class="cycle-slideshow" 
+    data-cycle-timeout=0
+    data-cycle-next="#next5"
+    data-cycle-prev="#prev5"
+    >
+    <img src="../images/p1.jpg" data-cycle-fx=tileSlide data-cycle-tile-vertical=false>
+    <img src="../images/p2.jpg" data-cycle-fx=tileBlind data-cycle-tile-count=12>
+    <img src="../images/p3.jpg" data-cycle-fx=tileSlide data-cycle-tile-count=4>
+    <img src="../images/p4.jpg" data-cycle-fx=tileBlind data-cycle-tile-vertical=false>
+</div>
+<div class=center>
+    <a href=# id=prev5>&lt;&lt; Prev </a>
+    <a href=# id=next5> Next &gt;&gt; </a>
+</div>
+
+
+
+<h2 id="options">Tile Options</h2>
+<p>
+Options can be set on the slideshow element or the slide element using 
+<code>data-cycle-<em><strong>option-name</strong></em></code> attributes. 
+Option attribute names are always lowercase and prefixed with <code>data-cycle-</code>.  For example,
+to set the <em>tile-count</em> option you would use the
+<code>data-cycle-tile-count</code> attribute.
+
+<table class=config>
+<thead><tr><th>Name<th>Default Value<th>Description</thead>
+<tr><th>tile-count<td>7<td>The number of tiles to use in the transition.
+<tr><th>tile-delay<td>100<td>The number of milliseconds to delay each individual tile transition.
+<tr><th>tile-vertical<td>true<td>Set to <code>false</code> for a horizontal transition.
+</table>
+
+
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+

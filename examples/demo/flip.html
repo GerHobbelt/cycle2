@@ -1,0 +1,117 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Flip Transitions</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Flip Transitions</h1>
+</div>
+
+<div id="main">
+
+<script src="../../jquery.cycle2.flip.js"></script>
+<style>
+.cycle-slideshow { 
+    background: none;
+    -webkit-perspective: 1000;
+    -webkit-transform-style: preserve-3d;
+    -moz-perspective: 1000;
+    -moz-transform-style: preserve-3d;
+    -o-perspective: 1000;
+    -o-transform-style: preserve-3d;
+    perspective: 1000;
+    transform-style: preserve-3d;  
+}
+</style>
+
+<div class=info>
+    <p>
+    Cycle2's <em>flip</em> transitions are only supported on 
+    <a href="http://caniuse.com/transforms3d">browsers that support 
+    CSS3 3D transforms</a>.
+    This includes IE10 as well as current versions of Chrome, Firefox, Opera and Safari.
+</div>
+
+<div class=info>
+    <p>
+    Cycle2's <em>flip</em> transition plugin must be included in order to use the flip effect.  See the
+    <a href="../download/index.html">Download page</a> for a link to the flip plugin.
+</div>
+
+<h2>Horizontal Flip</h2>
+<pre>
+&lt;div class="cycle-slideshow" 
+    <span class=special>data-cycle-fx=flipHorz</span>
+    data-cycle-timeout=2000
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+&lt;/div>
+</pre>
+<div class="cycle-slideshow" 
+    data-cycle-fx=flipHorz
+    data-cycle-timeout=2000
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+<h2>Vertical Flip</h2>
+<pre>
+&lt;div class="cycle-slideshow" 
+    <span class=special>data-cycle-fx=flipVert</span>
+    data-cycle-timeout=2000
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg">
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg">
+&lt;/div>
+</pre>
+<div class="cycle-slideshow" 
+    data-cycle-fx=flipVert
+    data-cycle-timeout=2000
+    >
+    <img src="../images/p1.jpg">
+    <img src="../images/p2.jpg">
+    <img src="../images/p3.jpg">
+    <img src="../images/p4.jpg">
+</div>
+
+<h2>CSS</h2>
+<p>You may wish to also include (and possibly modify) CSS like the following to further control the flip effect:
+<pre>
+.cycle-slideshow { 
+    -webkit-perspective: 1000;
+    -webkit-transform-style: preserve-3d;
+    -moz-perspective: 1000;
+    -moz-transform-style: preserve-3d;
+    -o-perspective: 1000;
+    -o-transform-style: preserve-3d;
+    perspective: 1000;
+    transform-style: preserve-3d;  
+}
+</pre>
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+
+

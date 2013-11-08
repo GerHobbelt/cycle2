@@ -1,0 +1,77 @@
+<!doctype html>
+<html>
+
+
+<meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cycle2 Bookmarkable Slides</title>
+
+<link rel=stylesheet href="../site.css">
+<link rel=stylesheet href="demo-slideshow.css">
+<script src="../js/jquery.js"></script>
+<script src="../../dist/jquery.cycle2.js"></script>
+</head>
+<body>
+<div class=page-header>
+    <h1><a href="../index.html"><img id=logo src="../logo.png" width=48 height=48></a> Bookmarkable Slides</h1>
+</div>
+
+<div id="main">
+
+<p>
+Cycle2 makes it very easy to have bookmarkable slides.  All that needs to be done is
+to add the <code>data-cycle-hash</code> attribute to each slide and assign its value
+to whatever you wish to be the bookmark hash.  Each time the active slide is 
+changed the <code>location.hash</code> value is updated to reflect the current slide.
+
+<div class=info>
+<p>
+Cycle2's implementation of this feature uses the <code>hashchange</code> event which is
+not supported on IE6 or 7.
+</div>
+
+
+
+<h2 id="simple">Simple</h2>
+<pre>
+&lt;div class=center>
+    &lt;span class="prev">&lt;a href=#>&lt;&lt; Prev&lt;/a>&lt;/span>
+    &lt;span class="next" style="margin-left:20px">&lt;a href=#>Next &gt;&gt;&lt;/a>&lt;/span>
+&lt;/div>
+&lt;div class="cycle-slideshow"
+    data-cycle-prev=".prev"
+    data-cycle-next=".next"
+    data-cycle-fx="scrollHorz"
+    data-cycle-timeout=0
+    >
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p1.jpg" <span class=special>data-cycle-hash="spring"</span>>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p2.jpg" <span class=special>data-cycle-hash="trees"</span>>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p3.jpg" <span class=special>data-cycle-hash="water"</span>>
+    &lt;img src="http://jquery.malsup.com/cycle2/images/p4.jpg" <span class=special>data-cycle-hash="sunset"</span>>
+&lt;/div>
+</pre>
+
+<div class=center>
+    <span class="prev"><a href=#>&lt;&lt; Prev</a></span>
+    <span class="next" style="margin-left:20px"><a href=#>Next &gt;&gt;</a></span>
+</div>
+<div class="cycle-slideshow"
+    data-cycle-prev=".prev"
+    data-cycle-next=".next"
+    data-cycle-fx="scrollHorz"
+    data-cycle-timeout=0
+    >
+    <img src="../images/p1.jpg" data-cycle-hash="spring">
+    <img src="../images/p2.jpg" data-cycle-hash="trees">
+    <img src="../images/p3.jpg" data-cycle-hash="water">
+    <img src="../images/p4.jpg" data-cycle-hash="sunset">
+</div>
+
+</div> <!-- #main -->
+
+</body>
+
+
+</html>
+
