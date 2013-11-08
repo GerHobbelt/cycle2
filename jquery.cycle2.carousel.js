@@ -6,7 +6,7 @@ $( document ).on('cycle-bootstrap', function( e, opts, API ) {
     if ( opts.fx !== 'carousel' )
         return;
 
-    API.getSlideIndex = function( el ) {ge
+    API.getSlideIndex = function( el ) {
         var slides = this.opts()._carouselWrap.children();
         var i = slides.index( el );
         return i % slides.length;
@@ -28,7 +28,7 @@ $.fn.cycle.transitions.carousel = {
     // transition API impl
     preInit: function( opts ) {
         opts.hideNonActive = false;
-        
+
         opts.container.on('cycle-destroyed', $.proxy(this.onDestroy, opts.API));
         // override default API implementation
         opts.API.stopTransition = this.stopTransition;
@@ -36,7 +36,7 @@ $.fn.cycle.transitions.carousel = {
         // issue #10
         for (var i=0; i < opts.startingSlide; i++) {
             opts.container.append( opts.slides[0] );
-        }        
+        }
     },
 
     // transition API impl
@@ -188,7 +188,7 @@ $.fn.cycle.transitions.carousel = {
             else if ( hops < 0 && opts.currSlide > maxCurr ) {
                 hops += opts.currSlide - maxCurr;
             }
-            else 
+            else
                 currSlide = opts.currSlide;
 
             moveBy = this.getScroll( opts, vert, currSlide, hops );
@@ -234,7 +234,7 @@ $.fn.cycle.transitions.carousel = {
         }
         else {
             for (i=currSlide; i > currSlide+hops; i--)
-                moveBy += this.getDim( opts, i-1, vert);
+                moveBy += this.getDim( opts, i - 1, vert);
         }
         return moveBy;
     },
