@@ -90,7 +90,7 @@ grunt.initConfig({
 		},
 		gruntfile: [ "Gruntfile.js" ],
 		dist: [ "dist/*.js" ],
-		src: [ "./*.js" ]
+		src: [ "jquery.cycle2.*.js" ]
 	},
 	watch: {
 		files: [ ".jshintrc", "{*,.*}" ],
