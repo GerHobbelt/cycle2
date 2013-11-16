@@ -5,7 +5,7 @@
  * Copyright 2013 Mike Alsup and other contributors
  * Dual licensed under the MIT license and GNU Public Licence 
  *
- * Date: 2013-11-08T21:11Z
+ * Date: 2013-11-14T00:43Z
  */
 
 (function( window ) {
@@ -298,6 +298,20 @@ $.fn.cycle.API = {
         }
         return tx;
     },
+    
+    swapInDataSrc: function (opts, slideIndex) {
+        if (slideIndex < opts.slides.length) {
+            var $slideImg = $($(opts.slides[slideIndex]).find("img")[0]);
+
+            if ($slideImg) {
+                var dataSrc = $slideImg.data("src");
+                if (dataSrc) {
+                    $slideImg.attr("src", dataSrc);
+                    $slideImg.data("src", null);    // don't swap it again
+                }
+            }
+        }
+    },
 
     prepareTx: function( manual, fwd ) {
         var opts = this.opts();
@@ -342,6 +356,8 @@ $.fn.cycle.API = {
             if ( tx.before )
                 tx.before( slideOpts, curr, next, fwd );
 
+            opts.API.swapInDataSrc(slideOpts, slideOpts.nextSlide); // ensure the current slide is present
+
             after = function() {
                 opts.busy = false;
                 // #76; bail if slideshow has been destroyed
@@ -350,6 +366,9 @@ $.fn.cycle.API = {
 
                 if (tx.after)
                     tx.after( slideOpts, curr, next, fwd );
+
+                opts.API.swapInDataSrc(slideOpts, slideOpts.nextSlide); // ensure the next slide is present
+
                 opts.API.trigger('cycle-after', [ slideOpts, curr, next, fwd ]);
                 opts.API.queueTransition( slideOpts);
                 opts.API.updateView( true );
