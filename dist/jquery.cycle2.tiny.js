@@ -5,7 +5,7 @@
  * Copyright 2013 Mike Alsup and other contributors
  * Dual licensed under the MIT license and GNU Public Licence 
  *
- * Date: 2013-11-14T00:43Z
+ * Date: 2013-11-21T19:27Z
  */
 
 (function( window ) {
