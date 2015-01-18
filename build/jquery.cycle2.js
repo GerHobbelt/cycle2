@@ -1,7 +1,7 @@
 /*!
-* jQuery Cycle2; version: 2.1.6 build: 20141007
+* jQuery Cycle2; version: 2.1.6 build: 20150118
 * http://jquery.malsup.com/cycle2/
-* Copyright (c) 2014 M. Alsup; Dual licensed: MIT/GPL
+* Copyright (c) 2015 M. Alsup; Dual licensed: MIT/GPL
 */
 
 /* Cycle2 core engine */
@@ -303,6 +303,20 @@ $.fn.cycle.API = {
         }
         return tx;
     },
+    
+    swapInDataSrc: function (opts, slideIndex) {
+        if (slideIndex < opts.slides.length) {
+            var $slideImg = $($(opts.slides[slideIndex]).find("img")[0]);
+
+            if ($slideImg) {
+                var dataSrc = $slideImg.data("src");
+                if (dataSrc) {
+                    $slideImg.attr("src", dataSrc);
+                    $slideImg.data("src", null);    // don't swap it again
+                }
+            }
+        }
+    },
 
     prepareTx: function( manual, fwd ) {
         var opts = this.opts();
@@ -347,6 +361,8 @@ $.fn.cycle.API = {
             if ( tx.before )
                 tx.before( slideOpts, curr, next, fwd );
 
+            opts.API.swapInDataSrc(slideOpts, slideOpts.nextSlide); // ensure the current slide is present
+
             after = function() {
                 opts.busy = false;
                 // #76; bail if slideshow has been destroyed
@@ -355,6 +371,9 @@ $.fn.cycle.API = {
 
                 if (tx.after)
                     tx.after( slideOpts, curr, next, fwd );
+
+                opts.API.swapInDataSrc(slideOpts, slideOpts.nextSlide); // ensure the next slide is present
+
                 opts.API.trigger('cycle-after', [ slideOpts, curr, next, fwd ]);
                 opts.API.queueTransition( slideOpts);
                 opts.API.updateView( true );
@@ -1353,12 +1372,12 @@ $(document).on( 'cycle-update-view', function( e, opts, slideOpts, currSlide ) {
     var prevBoundry = opts._prevBoundry || 0;
     var nextBoundry = (opts._nextBoundry !== undefined)?opts._nextBoundry:opts.slideCount - 1;
 
-    if ( opts.currSlide == nextBoundry )
+    if ( opts.currSlide >= nextBoundry )
         next.addClass( cls ).prop( 'disabled', true );
     else
         next.removeClass( cls ).prop( 'disabled', false );
 
-    if ( opts.currSlide === prevBoundry )
+    if ( opts.currSlide <= prevBoundry )
         prev.addClass( cls ).prop( 'disabled', true );
     else
         prev.removeClass( cls ).prop( 'disabled', false );
